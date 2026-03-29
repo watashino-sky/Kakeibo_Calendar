@@ -439,12 +439,14 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbzdJY__eIbZ5GSvzkuGXsMH
 
 async function gasGet(params) {
   const url = GAS_URL + '?' + new URLSearchParams(params);
-  const res = await fetch(url);
+  const res = await fetch(url, { redirect: 'follow' });
   return res.json();
 }
 async function gasPost(body) {
   const res = await fetch(GAS_URL, {
     method: 'POST',
+    redirect: 'follow',
+    headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify(body)
   });
   return res.json();
@@ -1096,18 +1098,27 @@ function deleteSub(i) {
 // ── Init ──
 async function init() {
   // ローディング表示
-  document.getElementById('app').innerHTML += '<div id="loading" style="position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:12px"><div style="font-family:'DM Serif Display',serif;font-size:24px;color:var(--accent)">家計簿</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.1em">Loading...</div></div>';
+  const loadingEl = document.createElement('div');
+  loadingEl.id = 'loading';
+  loadingEl.style.cssText = 'position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:12px';
+  loadingEl.innerHTML = '<div style="font-family:'DM Serif Display',serif;font-size:24px;color:var(--accent)">家計簿</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.1em">Loading...</div>';
+  document.body.appendChild(loadingEl);
+
   try {
-    const data = await gasGet({ action: 'getAll' });
-    if(data.records) records = data.records;
-    if(data.coupons) coupons = data.coupons;
-    if(data.tags && data.tags.length) tags = data.tags;
-    if(data.shops) shops = data.shops;
-    if(data.subs) subscriptions = data.subs;
+    const data = await Promise.race([
+      gasGet({ action: 'getAll' }),
+      new Promise((_,reject) => setTimeout(() => reject(new Error('timeout')), 10000))
+    ]);
+    if(data && data.records) records = data.records;
+    if(data && data.coupons) coupons = data.coupons;
+    if(data && data.tags && data.tags.length) tags = data.tags;
+    if(data && data.shops) shops = data.shops;
+    if(data && data.subs) subscriptions = data.subs;
   } catch(e) {
     console.error('GAS読み込みエラー:', e);
+    // エラーでもアプリは起動する
   }
-  document.getElementById('loading')?.remove();
+  loadingEl.remove();
   showScreen('calendar');
 }
 init();
