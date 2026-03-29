@@ -452,6 +452,15 @@ async function gasPost(body) {
   return res.json();
 }
 
+// ── Utils ──
+function fmt(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function fmtJP(str) {
+  const d = new Date(str+'T00:00:00');
+  return `${d.getMonth()+1}月${d.getDate()}日`;
+}
+
 // ── State ──
 const today = new Date();
 const todayStr = fmt(today);
@@ -466,13 +475,7 @@ let currentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 let calMode = 'amount';
 let nextId = 100;
 
-function fmt(d) {
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-function fmtJP(str) {
-  const d = new Date(str+'T00:00:00'); 
-  return `${d.getMonth()+1}月${d.getDate()}日`;
-}
+
 function daysUntil(dateStr) {
   const d = new Date(dateStr+'T00:00:00');
   const t = new Date(todayStr+'T00:00:00');
@@ -1109,11 +1112,14 @@ async function init() {
       gasGet({ action: 'getAll' }),
       new Promise((_,reject) => setTimeout(() => reject(new Error('timeout')), 10000))
     ]);
-    if(data && data.records) records = data.records;
-    if(data && data.coupons) coupons = data.coupons;
-    if(data && data.tags && data.tags.length) tags = data.tags;
-    if(data && data.shops) shops = data.shops;
-    if(data && data.subs) subscriptions = data.subs;
+    if(data) {
+      records       = data.records   || data['レコード']  || [];
+      coupons       = data.coupons   || data['クーポン']  || [];
+      const t       = data.tags      || data['タグ']      || [];
+      if(t.length) tags = t;
+      shops         = data.shops     || data['ショップ']  || [];
+      subscriptions = data.subs      || data['購読']      || [];
+    }
   } catch(e) {
     console.error('GAS読み込みエラー:', e);
     // エラーでもアプリは起動する
