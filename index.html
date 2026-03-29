@@ -435,7 +435,8 @@ function renderCalendar() {
   const dayTotals = {};
   records.filter(r => r.date.startsWith(ms)).forEach(r => {
     const d = r.date.split('-')[2];
-    dayTotals[d] = (dayTotals[d]||0) + r.items.reduce((s,i) => s+i.price, 0);
+    const items = Array.isArray(r.items) ? r.items : (typeof r.items === 'string' ? JSON.parse(r.items) : []);
+    dayTotals[d] = (dayTotals[d]||0) + items.reduce((s,i) => s+(Number(i.price)||0), 0);
   });
   const couponDays = {};
   coupons.filter(c => !c.used && c.exp && c.exp.startsWith(ms)).forEach(c => {
@@ -454,13 +455,13 @@ function renderCalendar() {
     const ds = String(d).padStart(2,'0');
     const dateStr = ms+'-'+ds;
     const dow = new Date(y,m,d).getDay();
-    const subAmt = subs.reduce((s,sub) => getSubDates(sub,y,m).includes(dateStr) ? s+sub.amount : s, 0);
+    const subAmt = subs.reduce((s,sub) => getSubDates(sub,y,m).includes(dateStr) ? s+Number(sub.amount) : s, 0);
     const total = (dayTotals[ds]||0) + subAmt;
     const hasCoupon = !!couponDays[ds];
     const hasSub = subAmt > 0;
     const isToday = dateStr === todayStr;
     const cell = document.createElement('div');
-    cell.className = 'cal-cell'+(isToday?' today':'')+(total>0||hasCoupon?' has-data':'')+(dow===0?' sun':dow===6?' sat':'');
+    cell.className = 'cal-cell'+(isToday?' today':'')+((total>0||hasCoupon||hasSub)?' has-data':'')+(dow===0?' sun':dow===6?' sat':'');
     cell.onclick = () => openDay(dateStr);
     let html = '<div class="cal-day">'+d+'</div>';
     if(calMode==='amount' && total>0) html += '<div class="cal-amt">'+total.toLocaleString()+'</div>';
