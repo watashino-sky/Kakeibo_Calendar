@@ -2,1170 +2,319 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>家計簿</title>
 <link rel="icon" type="image/png" href="data:image/png;base64,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">
 <link rel="apple-touch-icon" href="data:image/png;base64,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">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #2c3040;
-    --bg2: #353a4d;
-    --bg3: #3d4357;
-    --card: #454b60;
-    --border: #505669;
-    --text: #d8dce8;
-    --text-dim: #8892a8;
-    --text-bright: #f0f2f8;
-    --accent: #e2d9c4;
-    --accent2: #c8b896;
-    --accent-glow: rgba(226,217,196,0.14);
-    --red: #e07878;
-    --green: #7abfa0;
-    --tag-bg: #404760;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; overflow: hidden; }
+:root {
+  --bg:     #2c3040;
+  --bg2:    #353a4d;
+  --bg3:    #3d4357;
+  --card:   #454b60;
+  --border: #505669;
+  --text:   #d8dce8;
+  --dim:    #8892a8;
+  --bright: #f0f2f8;
+  --accent: #e2d9c4;
+  --accent2:#c8b896;
+  --aglow:  rgba(226,217,196,0.14);
+  --red:    #e07878;
+  --green:  #7abfa0;
+  --tagbg:  #404760;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:"Noto Sans JP",sans-serif;font-weight:300;overflow:hidden}
+#app{display:flex;flex-direction:column;height:100dvh}
 
-  /* ── Layout ── */
-  #app { display: flex; flex-direction: column; height: 100dvh; }
-  .screen { display: none !important; flex: 1; overflow-y: auto; padding-bottom: 80px; flex-direction: column; }
-  .screen.active { display: flex !important; }
+/* screens */
+.screen{display:none;flex:1;flex-direction:column;overflow-y:auto;padding-bottom:72px}
+.screen.active{display:flex}
 
-  /* ── Top bar ── */
-  .topbar {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 20px 12px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-    position: sticky; top: 0; z-index: 10;
-  }
-  .topbar-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--accent); letter-spacing: 0.02em; }
-  .topbar-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; }
-  .topbar-right { display: flex; gap: 8px; }
-  .icon-btn { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg3); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-dim); font-size: 15px; transition: all 0.15s; }
-  .icon-btn:active { background: var(--card); color: var(--accent); }
+/* topbar */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 10px;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:10}
+.topbar-title{font-family:"DM Serif Display",serif;font-size:22px;color:var(--accent)}
+.topbar-sub{font-family:"DM Mono",monospace;font-size:10px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+.icon-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);font-size:16px}
 
-  /* ── Bottom nav ── */
-  .bottom-nav {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    height: 64px; background: var(--bg2);
-    border-top: 1px solid var(--border);
-    display: flex; z-index: 20;
-  }
-  .nav-item {
-    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 3px; cursor: pointer; color: var(--text-dim); transition: color 0.15s;
-    font-size: 9px; font-family: 'DM Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase;
-  }
-  .nav-item svg { width: 20px; height: 20px; }
-  .nav-item.active { color: var(--accent); }
-  .nav-item.active svg path, .nav-item.active svg rect, .nav-item.active svg circle { stroke: var(--accent); }
+/* bottom nav */
+.nav{position:fixed;bottom:0;left:0;right:0;height:64px;background:var(--bg2);border-top:1px solid var(--border);display:flex;z-index:20}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:var(--dim);font-size:9px;font-family:"DM Mono",monospace;letter-spacing:.06em;text-transform:uppercase}
+.nav-item svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5}
+.nav-item.active{color:var(--accent)}
 
-  /* ── Calendar ── */
-  .cal-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px 8px; }
-  .cal-month { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--text-bright); }
-  .cal-year { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-dim); margin-top: 2px; }
-  .cal-nav { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border); background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-dim); font-size: 16px; }
-  .cal-nav:active { background: var(--bg3); }
+/* calendar */
+.cal-nav-row{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 8px}
+.cal-month{font-family:"DM Serif Display",serif;font-size:26px;color:var(--bright)}
+.cal-year{font-family:"DM Mono",monospace;font-size:11px;color:var(--dim);margin-top:2px}
+.cal-arrow{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--dim);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.summary{margin:0 16px 12px;padding:14px;background:var(--bg3);border:1px solid var(--border);border-radius:12px}
+.summary-label{font-family:"DM Mono",monospace;font-size:10px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.summary-amount{font-family:"DM Serif Display",serif;font-size:30px;color:var(--bright)}
+.summary-amount span{font-family:"DM Mono",monospace;font-size:13px;color:var(--dim);margin-left:4px}
+.toggle{display:flex;margin:0 16px 10px;background:var(--bg3);border-radius:8px;padding:3px;border:1px solid var(--border)}
+.toggle-btn{flex:1;padding:6px 0;text-align:center;font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.06em;color:var(--dim);border-radius:6px;cursor:pointer;text-transform:uppercase}
+.toggle-btn.active{background:var(--card);color:var(--accent)}
+.wdays{display:grid;grid-template-columns:repeat(7,1fr);padding:0 10px}
+.wd{text-align:center;font-family:"DM Mono",monospace;font-size:10px;color:var(--dim);padding:4px 0}
+.wd:first-child{color:var(--red);opacity:.7}
+.wd:last-child{color:#7a9abf;opacity:.7}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);padding:2px 10px 12px;gap:3px}
+.cal-cell{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;border:1px solid transparent;padding:2px}
+.cal-cell.today{border-color:var(--accent2);background:var(--aglow)}
+.cal-cell.has-data{background:var(--bg3)}
+.cal-cell.empty{cursor:default}
+.cal-day{font-size:12px;color:var(--text);line-height:1}
+.cal-cell.today .cal-day{color:var(--accent);font-weight:500}
+.cal-cell.sun .cal-day{color:var(--red);opacity:.8}
+.cal-cell.sat .cal-day{color:#7a9abf;opacity:.8}
+.cal-amt{font-family:"DM Mono",monospace;font-size:7px;color:var(--accent2);margin-top:2px;line-height:1}
+.dot{width:4px;height:4px;border-radius:50%;margin-top:2px}
+.dot.red{background:var(--red)}
+.dot.green{background:var(--green)}
 
-  .cal-toggle { display: flex; margin: 8px 20px; background: var(--bg3); border-radius: 8px; padding: 3px; border: 1px solid var(--border); }
-  .cal-toggle-btn { flex: 1; padding: 6px 0; text-align: center; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: var(--text-dim); border-radius: 6px; cursor: pointer; transition: all 0.15s; text-transform: uppercase; }
-  .cal-toggle-btn.active { background: var(--card); color: var(--accent); }
+/* day */
+.day-header{padding:14px 18px 0}
+.day-date{font-family:"DM Serif Display",serif;font-size:24px;color:var(--bright)}
+.day-total{font-family:"DM Mono",monospace;font-size:18px;color:var(--accent);margin-top:4px}
+.sec-label{font-family:"DM Mono",monospace;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;padding:14px 18px 6px}
+.trip-card{margin:0 14px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.trip-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--border)}
+.trip-shop{font-size:14px;color:var(--bright);font-weight:500}
+.trip-total{font-family:"DM Mono",monospace;font-size:15px;color:var(--accent)}
+.trip-items{padding:6px 12px 10px}
+.trip-item{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.trip-item:last-child{border:none}
+.trip-price{font-family:"DM Mono",monospace;font-size:13px;color:var(--text)}
+.tag-chip{font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tagbg);color:var(--dim);font-family:"DM Mono",monospace;border:1px solid var(--border)}
+.sub-badge{font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(122,191,160,.15);color:var(--green);font-family:"DM Mono",monospace;border:1px solid rgba(122,191,160,.3)}
+.coupon-alert{margin:6px 12px;padding:7px 10px;background:rgba(224,120,120,.08);border:1px solid rgba(224,120,120,.2);border-radius:7px;font-size:11px;color:var(--red)}
+.add-btn{margin:0 14px 14px;padding:13px;background:transparent;border:1px dashed var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--dim);font-size:13px}
+.empty-state{text-align:center;padding:50px 20px;color:var(--dim);font-size:13px;line-height:2}
 
-  .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); padding: 4px 12px 0; }
-  .cal-wd { text-align: center; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); padding: 4px 0; letter-spacing: 0.04em; }
-  .cal-wd:first-child { color: var(--red); opacity: 0.7; }
-  .cal-wd:last-child { color: #7a9abf; opacity: 0.7; }
+/* coupon */
+.coupon-list{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px}
+.coupon-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px}
+.coupon-card.used{opacity:.4}
+.coupon-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.coupon-shop{font-size:14px;color:var(--bright);font-weight:500}
+.badge{font-family:"DM Mono",monospace;font-size:9px;padding:2px 8px;border-radius:4px;background:var(--bg);border:1px solid var(--border);color:var(--dim);text-transform:uppercase}
+.badge.unlimited{color:var(--accent2);border-color:var(--accent2)}
+.badge.used-badge{color:var(--dim)}
+.coupon-exp{font-family:"DM Mono",monospace;font-size:12px;color:var(--text)}
+.coupon-exp.urgent{color:var(--red)}
+.coupon-exp.soon{color:#e0b870}
+.coupon-memo{font-size:12px;color:var(--dim);margin-top:6px;padding-top:6px;border-top:1px solid var(--border)}
+.coupon-actions{display:flex;gap:6px;margin-top:8px}
+.coupon-btn{flex:1;padding:7px;background:var(--bg);border:1px solid var(--border);border-radius:7px;font-family:"DM Mono",monospace;font-size:10px;color:var(--dim);cursor:pointer;text-align:center;text-transform:uppercase}
+.coupon-btn.use{color:var(--green);border-color:rgba(122,191,160,.3)}
+.shop-header{font-family:"DM Mono",monospace;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;padding:12px 18px 6px;border-top:1px solid var(--border);margin-top:6px}
+.shop-header:first-of-type{border-top:none;margin-top:0}
 
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); padding: 4px 12px 16px; gap: 3px; }
-  .cal-cell {
-    aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    border-radius: 8px; cursor: pointer; transition: background 0.12s; padding: 2px;
-    border: 1px solid transparent;
-  }
-  .cal-cell:active { background: var(--bg3); }
-  .cal-cell.today { border-color: var(--accent2); background: var(--accent-glow); }
-  .cal-cell.has-data { background: var(--bg3); }
-  .cal-cell.has-data:active { background: var(--card); }
-  .cal-cell.empty { cursor: default; }
-  .cal-day { font-size: 12px; color: var(--text); font-weight: 400; line-height: 1; }
-  .cal-cell.today .cal-day { color: var(--accent); font-weight: 500; }
-  .cal-cell:first-child .cal-day, .cal-cell.sun .cal-day { color: var(--red); opacity: 0.8; }
-  .cal-cell.sat .cal-day { color: #7a9abf; opacity: 0.8; }
-  .cal-amount { font-family: 'DM Mono', monospace; font-size: 7px; color: var(--accent2); margin-top: 2px; line-height: 1; }
-  .cal-coupon-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--red); margin-top: 2px; opacity: 0.8; }
+/* settings */
+.settings-body{padding:16px;padding-bottom:80px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:20px}
+.settings-section{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px}
+.settings-title{font-family:"DM Mono",monospace;font-size:11px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.settings-sub{font-size:11px;color:var(--dim);margin-bottom:10px;margin-top:-6px}
+.manage-list{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.manage-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 11px}
+.manage-name{font-size:13px;color:var(--bright)}
+.manage-sub{font-family:"DM Mono",monospace;font-size:10px;color:var(--dim);margin-top:2px}
+.manage-actions{display:flex;gap:6px}
+.manage-btn{font-family:"DM Mono",monospace;font-size:10px;padding:4px 10px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--dim);cursor:pointer;text-transform:uppercase}
+.manage-btn.del{color:var(--red);border-color:rgba(224,120,120,.3)}
+.add-row{display:flex;gap:8px;align-items:center}
+.add-row-btn{padding:11px 14px;background:var(--aglow);border:1px solid var(--accent2);border-radius:8px;color:var(--accent);font-family:"DM Mono",monospace;font-size:11px;cursor:pointer;white-space:nowrap;text-transform:uppercase}
 
-  /* Monthly summary */
-  .month-summary { margin: 0 20px 16px; padding: 16px; background: var(--bg3); border-radius: 12px; border: 1px solid var(--border); }
-  .month-summary-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
-  .month-summary-amount { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--text-bright); }
-  .month-summary-amount span { font-family: 'DM Mono', monospace; font-size: 14px; color: var(--text-dim); margin-left: 4px; }
+/* form panel */
+.panel{position:fixed;inset:0;background:var(--bg);z-index:30;display:none;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.panel.open{display:flex;transform:translateY(0)}
+.panel-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border)}
+.panel-title{font-family:"DM Serif Display",serif;font-size:20px;color:var(--accent)}
+.panel-close{width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);font-size:20px}
+.panel-body{flex:1;overflow-y:auto;padding:18px;padding-bottom:90px}
+.form-group{margin-bottom:18px}
+.form-label{font-family:"DM Mono",monospace;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px;display:block}
+.form-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:11px 13px;color:var(--bright);font-family:"Noto Sans JP",sans-serif;font-size:15px;outline:none}
+.form-input:focus{border-color:var(--accent2)}
+.form-input::placeholder{color:var(--dim);font-size:13px}
+.tag-grid{display:flex;flex-wrap:wrap;gap:7px}
+.tag-btn{padding:6px 13px;border-radius:6px;border:1px solid var(--border);background:var(--tagbg);color:var(--dim);font-family:"DM Mono",monospace;font-size:11px;cursor:pointer}
+.tag-btn.on{background:var(--aglow);border-color:var(--accent2);color:var(--accent)}
+.item-list{display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
+.item-row{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 11px}
+.item-del{color:var(--dim);font-size:16px;cursor:pointer;padding:4px;margin-left:auto}
+.subtotal{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 15px;display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.subtotal-label{font-family:"DM Mono",monospace;font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.subtotal-val{font-family:"DM Serif Display",serif;font-size:26px;color:var(--accent)}
+.btn-primary{width:100%;padding:14px;background:var(--accent);color:var(--bg);border:none;border-radius:10px;font-size:14px;font-family:"Noto Sans JP",sans-serif;font-weight:500;cursor:pointer}
+.btn-secondary{width:100%;padding:13px;background:transparent;color:var(--dim);border:1px solid var(--border);border-radius:10px;font-size:13px;font-family:"Noto Sans JP",sans-serif;cursor:pointer;margin-top:8px}
+.btn-danger{width:100%;padding:13px;background:transparent;color:var(--red);border:1px solid rgba(224,120,120,.4);border-radius:10px;font-size:13px;font-family:"Noto Sans JP",sans-serif;cursor:pointer;margin-top:8px;display:none}
+.cycle-btns{display:flex;gap:8px}
+.cycle-btn{flex:1;padding:10px;text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-family:"DM Mono",monospace;font-size:11px;color:var(--dim);text-transform:uppercase}
+.cycle-btn.on{background:var(--aglow);border-color:var(--accent2);color:var(--accent)}
 
-  /* ── Shopping / Day view ── */
-  .day-header { padding: 16px 20px 0; }
-  .day-date { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--text-bright); }
-  .day-total-row { display: flex; align-items: baseline; gap: 8px; margin-top: 4px; }
-  .day-total-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
-  .day-total { font-family: 'DM Mono', monospace; font-size: 20px; color: var(--accent); }
-
-  .section-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; padding: 16px 20px 8px; }
-
-  /* Trip cards */
-  .trip-card { margin: 0 16px 10px; background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  .trip-card-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid var(--border); }
-  .trip-shop { font-size: 14px; color: var(--text-bright); font-weight: 500; }
-  .trip-time { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); }
-  .trip-total { font-family: 'DM Mono', monospace; font-size: 16px; color: var(--accent); }
-  .trip-items { padding: 8px 14px 12px; }
-  .trip-item { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-  .trip-item:last-child { border-bottom: none; }
-  .trip-item-left { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .trip-item-price { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--text); }
-  .tag-chip { font-size: 9px; padding: 2px 7px; border-radius: 4px; background: var(--tag-bg); color: var(--text-dim); font-family: 'DM Mono', monospace; letter-spacing: 0.04em; border: 1px solid var(--border); }
-  .coupon-notice { margin: 8px 14px; padding: 8px 10px; background: rgba(224,112,112,0.08); border: 1px solid rgba(224,112,112,0.2); border-radius: 8px; font-size: 11px; color: var(--red); display: flex; align-items: center; gap: 6px; }
-
-  /* Add trip form */
-  .add-trip-btn { margin: 0 16px 16px; padding: 14px; background: transparent; border: 1px dashed var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; color: var(--text-dim); font-size: 13px; font-family: 'Noto Sans JP', sans-serif; transition: all 0.15s; }
-  .add-trip-btn:active { background: var(--bg3); border-color: var(--accent2); color: var(--accent); }
-
-  /* ── Input form (modal-like) ── */
-  .form-panel {
-    position: fixed; bottom: 0; left: 0; right: 0; top: 0;
-    background: var(--bg); z-index: 30; display: none; flex-direction: column;
-    transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-  }
-  .form-panel.open { display: flex; transform: translateY(0); }
-  .form-topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border); }
-  .form-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--accent); }
-  .form-close { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-dim); font-size: 20px; }
-  .form-body { flex: 1; overflow-y: auto; padding: 20px; padding-bottom: 100px; }
-  .form-group { margin-bottom: 20px; }
-  .form-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; display: block; }
-  .form-input {
-    width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
-    padding: 12px 14px; color: var(--text-bright); font-family: 'Noto Sans JP', sans-serif; font-size: 15px;
-    outline: none; transition: border-color 0.15s;
-  }
-  .form-input:focus { border-color: var(--accent2); }
-  .form-input::placeholder { color: var(--text-dim); font-size: 13px; }
-  .datalist-suggest { background: var(--bg3); }
-
-  .tag-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-  .tag-select-btn {
-    padding: 7px 14px; border-radius: 6px; border: 1px solid var(--border);
-    background: var(--tag-bg); color: var(--text-dim); font-family: 'DM Mono', monospace;
-    font-size: 11px; letter-spacing: 0.04em; cursor: pointer; transition: all 0.15s;
-  }
-  .tag-select-btn.selected { background: var(--accent-glow); border-color: var(--accent2); color: var(--accent); }
-
-  /* Items list in form */
-  .item-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-  .item-row { display: flex; align-items: center; gap: 8px; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
-  .item-row-price { font-family: 'DM Mono', monospace; font-size: 14px; color: var(--text-bright); flex: 1; }
-  .item-row-tags { display: flex; gap: 4px; flex-wrap: wrap; flex: 2; }
-  .item-row-del { color: var(--text-dim); font-size: 16px; cursor: pointer; padding: 4px; }
-
-  .add-item-row { display: flex; gap: 8px; align-items: flex-end; }
-  .add-item-row .form-input { flex: 1; }
-
-  .subtotal-bar { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-  .subtotal-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; }
-  .subtotal-amount { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--accent); }
-  .subtotal-yen { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--text-dim); }
-
-  .btn-primary {
-    width: 100%; padding: 16px; background: var(--accent); color: var(--bg); border: none;
-    border-radius: 10px; font-size: 14px; font-family: 'Noto Sans JP', sans-serif; font-weight: 500;
-    cursor: pointer; letter-spacing: 0.04em; transition: opacity 0.15s;
-  }
-  .btn-primary:active { opacity: 0.85; }
-  .btn-secondary {
-    width: 100%; padding: 14px; background: transparent; color: var(--text-dim); border: 1px solid var(--border);
-    border-radius: 10px; font-size: 13px; font-family: 'Noto Sans JP', sans-serif;
-    cursor: pointer; margin-top: 10px; transition: all 0.15s;
-  }
-  .btn-secondary:active { background: var(--bg3); color: var(--text); }
-
-  /* ── Coupon screen ── */
-  .coupon-list { padding: 0 16px 16px; display: flex; flex-direction: column; gap: 10px; }
-  .coupon-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 14px; transition: opacity 0.15s; }
-  .coupon-card.used { opacity: 0.45; }
-  .coupon-shop-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-  .coupon-shop { font-size: 14px; color: var(--text-bright); font-weight: 500; }
-  .coupon-used-badge { font-family: 'DM Mono', monospace; font-size: 9px; padding: 2px 8px; border-radius: 4px; background: var(--bg); border: 1px solid var(--border); color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
-  .coupon-exp-row { display: flex; align-items: center; gap: 8px; }
-  .coupon-exp-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
-  .coupon-exp { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--text); }
-  .coupon-exp.urgent { color: var(--red); }
-  .coupon-exp.soon { color: #e0b870; }
-  .coupon-memo { font-size: 12px; color: var(--text-dim); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
-  .coupon-actions { display: flex; gap: 8px; margin-top: 10px; }
-  .coupon-action-btn { flex: 1; padding: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 7px; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); cursor: pointer; text-align: center; letter-spacing: 0.04em; transition: all 0.15s; text-transform: uppercase; }
-  .coupon-action-btn:active { background: var(--bg3); color: var(--accent); border-color: var(--accent2); }
-  .coupon-action-btn.use { color: var(--green); border-color: rgba(122,184,154,0.3); }
-
-  .section-shop-header { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; padding: 16px 20px 8px; border-top: 1px solid var(--border); margin-top: 8px; }
-  .section-shop-header:first-of-type { border-top: none; margin-top: 0; }
-
-  .add-coupon-btn { margin: 16px; padding: 14px; background: transparent; border: 1px dashed var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; color: var(--text-dim); font-size: 13px; transition: all 0.15s; }
-  .add-coupon-btn:active { background: var(--bg3); border-color: var(--accent2); color: var(--accent); }
-
-  /* ── Settings ── */
-  .settings-section { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
-  .settings-section-title { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
-  .settings-section-sub { font-size: 11px; color: var(--text-dim); margin-bottom: 12px; }
-  .manage-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; margin-top: 12px; }
-  .manage-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
-  .manage-item-name { font-size: 14px; color: var(--text-bright); }
-  .manage-item-actions { display: flex; gap: 6px; }
-  .manage-item-btn { font-family: 'DM Mono', monospace; font-size: 10px; padding: 4px 10px; border-radius: 5px; border: 1px solid var(--border); background: transparent; color: var(--text-dim); cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; transition: all 0.15s; }
-  .manage-item-btn:active { background: var(--bg3); color: var(--text); }
-  .manage-item-btn.del { color: var(--red); border-color: rgba(224,120,120,0.3); }
-  .manage-item-btn.del:active { background: rgba(224,120,120,0.1); }
-  .manage-add-row { display: flex; gap: 8px; align-items: center; }
-  .manage-add-btn { padding: 12px 16px; background: var(--accent-glow); border: 1px solid var(--accent2); border-radius: 8px; color: var(--accent); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; cursor: pointer; white-space: nowrap; transition: all 0.15s; text-transform: uppercase; }
-  .manage-add-btn:active { background: var(--card); }
-
-  /* ── Subscription ── */
-  .sub-cycle-btn { flex:1; padding:10px; text-align:center; background:var(--bg3); border:1px solid var(--border); border-radius:8px; cursor:pointer; font-family:'DM Mono',monospace; font-size:11px; color:var(--text-dim); letter-spacing:0.06em; transition:all 0.15s; }
-  .sub-cycle-btn.active { background:var(--accent-glow); border-color:var(--accent2); color:var(--accent); }
-  .sub-badge { font-family:'DM Mono',monospace; font-size:8px; padding:2px 6px; border-radius:3px; background:rgba(122,191,160,0.15); border:1px solid rgba(122,191,160,0.3); color:var(--green); letter-spacing:0.04em; }
-  .cal-sub-dot { width:4px; height:4px; border-radius:50%; background:var(--green); margin-top:2px; opacity:0.9; }
-
-
-  /* ── Toast ── */
-  .toast {
-    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
-    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-    padding: 10px 20px; font-family: 'DM Mono', monospace; font-size: 12px;
-    color: var(--text-bright); z-index: 100; opacity: 0;
-    transition: opacity 0.2s, transform 0.2s; pointer-events: none; white-space: nowrap;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast.success { border-color: var(--green); color: var(--green); }
-  .toast.error { border-color: var(--red); color: var(--red); }
-  /* ── Misc ── */
-  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-dim); font-size: 13px; line-height: 1.8; }
-  .empty-icon { font-size: 40px; margin-bottom: 16px; opacity: 0.4; }
-
-  /* Date pill */
-  .date-pill { display: inline-block; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; margin: 12px 20px 0; }
+/* toast */
+.toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--card);border:1px solid var(--border);border-radius:10px;padding:9px 18px;font-family:"DM Mono",monospace;font-size:11px;color:var(--bright);z-index:200;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{border-color:var(--green);color:var(--green)}
+.toast.err{border-color:var(--red);color:var(--red)}
 </style>
 </head>
 <body>
 <div id="app">
 
-  <!-- ===== CALENDAR SCREEN ===== -->
-  <div class="screen" id="screen-calendar" style="display:none">
-    <div class="topbar">
-      <div>
-        <div class="topbar-title">家計簿</div>
-      </div>
-      <div class="topbar-right">
-        <div class="icon-btn" onclick="openCouponAdd()">＋</div>
-      </div>
-    </div>
-
-    <div class="cal-header">
-      <button class="cal-nav" onclick="changeMonth(-1)">‹</button>
-      <div>
-        <div class="cal-month" id="cal-month-label"></div>
-        <div class="cal-year" id="cal-year-label"></div>
-      </div>
-      <button class="cal-nav" onclick="changeMonth(1)">›</button>
-    </div>
-
-    <div class="cal-toggle">
-      <div class="cal-toggle-btn active" id="toggle-amount" onclick="setCalMode('amount')">Total</div>
-      <div class="cal-toggle-btn" id="toggle-coupon" onclick="setCalMode('coupon')">Coupon</div>
-    </div>
-
-    <div id="month-summary" class="month-summary"></div>
-
-    <div class="cal-weekdays">
-      <div class="cal-wd">日</div><div class="cal-wd">月</div><div class="cal-wd">火</div>
-      <div class="cal-wd">水</div><div class="cal-wd">木</div><div class="cal-wd">金</div>
-      <div class="cal-wd">土</div>
-    </div>
-    <div class="cal-grid" id="cal-grid"></div>
+<!-- CALENDAR -->
+<div class="screen active" id="s-calendar">
+  <div class="topbar">
+    <div><div class="topbar-title">家計簿</div></div>
+    <div class="icon-btn" onclick="openPanel('coupon-panel')">＋</div>
   </div>
-
-  <!-- ===== DAY SCREEN ===== -->
-  <div class="screen" id="screen-day" style="display:none">
-    <div class="topbar">
-      <button class="cal-nav" onclick="showScreen('calendar')" style="border:none;background:transparent;font-size:20px;color:var(--text-dim);">‹</button>
-      <div class="topbar-title" id="day-screen-title">—</div>
-      <div style="width:36px"></div>
-    </div>
-    <div id="day-content"></div>
+  <div class="cal-nav-row">
+    <button class="cal-arrow" onclick="moveMonth(-1)">‹</button>
+    <div><div class="cal-month" id="cal-month"></div><div class="cal-year" id="cal-year"></div></div>
+    <button class="cal-arrow" onclick="moveMonth(1)">›</button>
   </div>
-
-  <!-- ===== COUPON SCREEN ===== -->
-  <div class="screen" id="screen-coupon" style="display:none">
-    <div class="topbar">
-      <div>
-        <div class="topbar-title">クーポン</div>
-        <div class="topbar-sub">Coupon</div>
-      </div>
-      <div class="topbar-right">
-        <div class="icon-btn" onclick="openCouponAdd()">＋</div>
-      </div>
-    </div>
-    <div id="coupon-list-content"></div>
+  <div class="toggle">
+    <div class="toggle-btn active" id="tog-amount" onclick="setMode('amount')">Total</div>
+    <div class="toggle-btn" id="tog-coupon" onclick="setMode('coupon')">Coupon</div>
   </div>
+  <div id="cal-summary" class="summary"></div>
+  <div class="wdays"><div class="wd">日</div><div class="wd">月</div><div class="wd">火</div><div class="wd">水</div><div class="wd">木</div><div class="wd">金</div><div class="wd">土</div></div>
+  <div id="cal-grid" class="cal-grid"></div>
+</div>
 
-  <!-- ===== BOTTOM NAV ===== -->
-  <nav class="bottom-nav">
-    <div class="nav-item active" id="nav-calendar" onclick="showScreen('calendar')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <rect x="3" y="4" width="18" height="18" rx="3" ry="3"/>
-        <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
-      </svg>
-      Calendar
-    </div>
-    <div class="nav-item" id="nav-coupon" onclick="showScreen('coupon')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M20 12V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6m16 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16 0H4"/>
-        <circle cx="12" cy="12" r="2"/>
-      </svg>
-      Coupon
-    </div>
-    <div class="nav-item" id="nav-settings" onclick="showScreen('settings')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
-      </svg>
-      Settings
-    </div>
-  </nav>
+<!-- DAY -->
+<div class="screen" id="s-day">
+  <div class="topbar">
+    <button onclick="goScreen('calendar')" style="background:transparent;border:none;color:var(--dim);font-size:22px;cursor:pointer">‹</button>
+    <div class="topbar-title" id="day-title"></div>
+    <div style="width:34px"></div>
+  </div>
+  <div id="day-body"></div>
+</div>
 
-  <!-- ===== SETTINGS SCREEN ===== -->
-  <div class="screen" id="screen-settings">
-    <div class="topbar">
-      <div>
-        <div class="topbar-title">設定</div>
-        <div class="topbar-sub">Settings</div>
+<!-- COUPON -->
+<div class="screen" id="s-coupon">
+  <div class="topbar">
+    <div><div class="topbar-title">クーポン</div><div class="topbar-sub">Coupon</div></div>
+    <div class="icon-btn" onclick="openPanel('coupon-panel')">＋</div>
+  </div>
+  <div id="coupon-body"></div>
+</div>
+
+<!-- SETTINGS -->
+<div class="screen" id="s-settings">
+  <div class="topbar"><div><div class="topbar-title">設定</div><div class="topbar-sub">Settings</div></div></div>
+  <div class="settings-body">
+    <div class="settings-section">
+      <div class="settings-title">タグ管理</div>
+      <div id="tag-list" class="manage-list"></div>
+      <div class="add-row">
+        <input class="form-input" id="new-tag" placeholder="新しいタグ名" style="flex:1">
+        <div class="add-row-btn" onclick="addTag()">追加</div>
       </div>
     </div>
-    <div style="padding:20px;padding-bottom:80px;overflow-y:auto;flex:1">
-      <div class="settings-section">
-        <div class="settings-section-title">タグ管理</div>
-        <div id="tag-manage-list" class="manage-list"></div>
-        <div class="manage-add-row">
-          <input class="form-input" id="new-tag-input" placeholder="新しいタグ名" style="flex:1">
-          <button class="manage-add-btn" onclick="addTag()">追加</button>
-        </div>
+    <div class="settings-section">
+      <div class="settings-title">お店管理</div>
+      <div class="settings-sub">買い物で使ったお店が自動登録されます</div>
+      <div id="shop-list" class="manage-list"></div>
+      <div class="add-row">
+        <input class="form-input" id="new-shop" placeholder="新しいお店名" style="flex:1">
+        <div class="add-row-btn" onclick="addShop()">追加</div>
       </div>
-      <div class="settings-section" style="margin-top:28px">
-        <div class="settings-section-title">お店管理</div>
-        <div class="settings-section-sub">買い物で使ったお店が自動登録されます</div>
-        <div id="shop-manage-list" class="manage-list"></div>
-        <div class="manage-add-row">
-          <input class="form-input" id="new-shop-input" placeholder="新しいお店名" style="flex:1">
-          <button class="manage-add-btn" onclick="addShop()">追加</button>
-        </div>
-      </div>
-
-      <!-- サブスク管理 -->
-      <div class="settings-section" style="margin-top:28px">
-        <div class="settings-section-title">サブスク管理</div>
-        <div class="settings-section-sub">請求日にカレンダーへ自動表示されます</div>
-        <div id="sub-manage-list" class="manage-list"></div>
-        <button class="btn-secondary" style="margin-top:4px" onclick="openSubForm()">＋ サブスクを追加</button>
+    </div>
+    <div class="settings-section">
+      <div class="settings-title">サブスク管理</div>
+      <div class="settings-sub">請求日にカレンダーへ自動表示されます</div>
+      <div id="sub-list" class="manage-list"></div>
+      <div class="add-row" style="justify-content:flex-end">
+        <div class="add-row-btn" onclick="openPanel('sub-panel')">＋ 追加</div>
       </div>
     </div>
   </div>
 </div>
 
-
-<!-- ===== SHOPPING FORM PANEL ===== -->
-<div class="form-panel" id="shop-form">
-  <div class="form-topbar">
-    <div class="form-title" id="shop-form-title">買い物を追加</div>
-    <div class="form-close" onclick="closeShopForm()">×</div>
+<!-- BOTTOM NAV -->
+<nav class="nav">
+  <div class="nav-item active" id="nav-calendar" onclick="goScreen('calendar')">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Calendar
   </div>
-  <div class="form-body">
+  <div class="nav-item" id="nav-coupon" onclick="goScreen('coupon')">
+    <svg viewBox="0 0 24 24"><path d="M20 12V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6m16 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16 0H4"/><circle cx="12" cy="12" r="2"/></svg>
+    Coupon
+  </div>
+  <div class="nav-item" id="nav-settings" onclick="goScreen('settings')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    Settings
+  </div>
+</nav>
+</div>
+
+<!-- SHOP FORM PANEL -->
+<div class="panel" id="shop-panel">
+  <div class="panel-head">
+    <div class="panel-title" id="shop-panel-title">買い物を追加</div>
+    <div class="panel-close" onclick="closePanel('shop-panel')">×</div>
+  </div>
+  <div class="panel-body">
     <div class="form-group">
       <label class="form-label">店名</label>
-      <input class="form-input" id="input-shop" list="shop-suggestions" placeholder="例：イオン、コンビニ…" autocomplete="off">
-      <datalist id="shop-suggestions"></datalist>
-      <div id="coupon-notice" style="display:none" class="coupon-notice">🎫 このお店のクーポンがあります！</div>
+      <input class="form-input" id="shop-input" list="shop-datalist" placeholder="例：イオン、コンビニ…" autocomplete="off">
+      <datalist id="shop-datalist"></datalist>
+      <div id="shop-coupon-alert" style="display:none;margin-top:8px" class="coupon-alert">🎫 このお店のクーポンがあります！</div>
     </div>
-
     <div class="form-group">
-      <label class="form-label">商品を追加</label>
-      <div class="item-list" id="item-list"></div>
-      <div style="margin-bottom:10px">
-        <div class="add-item-row" style="margin-bottom:8px">
-          <input class="form-input" id="input-price" type="number" inputmode="numeric" placeholder="金額（円）" style="flex:1">
-        </div>
-        <div class="tag-grid" id="tag-grid-input"></div>
-        <button class="btn-secondary" style="margin-top:10px" onclick="addItem()">＋ 商品を追加</button>
+      <label class="form-label">商品</label>
+      <div id="shop-item-list" class="item-list"></div>
+      <div class="form-input" style="display:flex;gap:8px;padding:8px;margin-bottom:8px;background:var(--bg3)">
+        <input id="price-input" type="number" inputmode="numeric" placeholder="金額（円）" style="flex:1;background:transparent;border:none;color:var(--bright);font-size:15px;outline:none">
       </div>
+      <div id="shop-tag-grid" class="tag-grid" style="margin-bottom:8px"></div>
+      <div class="btn-secondary" style="text-align:center;cursor:pointer" onclick="addItem()">＋ 商品を追加</div>
     </div>
-
-    <div class="subtotal-bar">
-      <div>
-        <div class="subtotal-label">小計</div>
-        <div style="display:flex;align-items:baseline;gap:4px">
-          <div class="subtotal-amount" id="subtotal-display">0</div>
-          <div class="subtotal-yen">円</div>
-        </div>
-      </div>
-      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-dim)" id="item-count-display">0点</div>
+    <div class="subtotal">
+      <div><div class="subtotal-label">小計</div><div class="subtotal-val" id="subtotal">0<span style="font-family:DM Mono,monospace;font-size:12px;color:var(--dim)"> 円</span></div></div>
+      <div style="font-family:DM Mono,monospace;font-size:11px;color:var(--dim)" id="item-count">0点</div>
     </div>
-
-    <button class="btn-primary" onclick="saveTrip()">登録する</button>
-    <button class="btn-secondary" onclick="closeShopForm()">キャンセル</button>
+    <div class="btn-primary" onclick="saveTrip()">登録する</div>
+    <div class="btn-secondary" style="text-align:center;cursor:pointer" onclick="closePanel('shop-panel')">キャンセル</div>
   </div>
 </div>
 
-<!-- ===== COUPON ADD FORM ===== -->
-<div class="form-panel" id="coupon-form">
-  <div class="form-topbar">
-    <div class="form-title">クーポンを追加</div>
-    <div class="form-close" onclick="closeCouponForm()">×</div>
+<!-- COUPON FORM PANEL -->
+<div class="panel" id="coupon-panel">
+  <div class="panel-head">
+    <div class="panel-title">クーポンを追加</div>
+    <div class="panel-close" onclick="closePanel('coupon-panel')">×</div>
   </div>
-  <div class="form-body">
+  <div class="panel-body">
     <div class="form-group">
       <label class="form-label">店名</label>
-      <input class="form-input" id="coupon-shop" list="shop-suggestions" placeholder="例：イオン" autocomplete="off">
+      <input class="form-input" id="coupon-shop" list="shop-datalist" placeholder="例：イオン" autocomplete="off">
     </div>
     <div class="form-group">
-      <label class="form-label">有効期限 <span style="color:var(--text-dim);font-size:9px;letter-spacing:0.04em">— 空欄で無制限</span></label>
+      <label class="form-label">有効期限 <span style="color:var(--dim);font-size:9px">— 空欄で無制限</span></label>
       <input class="form-input" id="coupon-exp" type="date">
     </div>
     <div class="form-group">
       <label class="form-label">メモ</label>
       <input class="form-input" id="coupon-memo" placeholder="例：500円引き、3000円以上">
     </div>
-    <button class="btn-primary" onclick="saveCoupon()">クーポンを登録</button>
-    <button class="btn-secondary" onclick="closeCouponForm()">キャンセル</button>
+    <div class="btn-primary" onclick="saveCoupon()">登録する</div>
+    <div class="btn-secondary" style="text-align:center;cursor:pointer" onclick="closePanel('coupon-panel')">キャンセル</div>
   </div>
 </div>
 
-<script>
-// ── GAS API ──
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbzdJY__eIbZ5GSvzkuGXsMHu8XiRk-RHZUlaD4qPrHng55Bwx8m94bBvrzL4O-CsEhx/exec';
-
-async function gasGet(params) {
-  const url = GAS_URL + '?' + new URLSearchParams(params);
-  const res = await fetch(url, { redirect: 'follow' });
-  return res.json();
-}
-async function gasPost(body) {
-  const res = await fetch(GAS_URL, {
-    method: 'POST',
-    redirect: 'follow',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify(body)
-  });
-  return res.json();
-}
-
-
-// ── Toast ──
-let toastTimer = null;
-function showToast(msg, type='success') {
-  let el = document.getElementById('toast');
-  if(!el) {
-    el = document.createElement('div');
-    el.id = 'toast';
-    el.className = 'toast';
-    document.body.appendChild(el);
-  }
-  el.textContent = msg;
-  el.className = `toast ${type}`;
-  void el.offsetWidth;
-  el.classList.add('show');
-  if(toastTimer) clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
-}
-
-// ── Utils ──
-function fmt(d) {
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-function fmtJP(str) {
-  const d = new Date(str+'T00:00:00');
-  return `${d.getMonth()+1}月${d.getDate()}日`;
-}
-
-// ── State ──
-const today = new Date();
-const todayStr = fmt(today);
-
-let records = [];
-let coupons = [];
-let tags = ['食費','日用品','交通費','娯楽','医療','その他'];
-let selectedTags = [];
-let currentItems = [];
-let currentDate = null;
-let currentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-let calMode = 'amount';
-let nextId = 100;
-
-
-function daysUntil(dateStr) {
-  const d = new Date(dateStr+'T00:00:00');
-  const t = new Date(todayStr+'T00:00:00');
-  return Math.ceil((d-t)/(1000*60*60*24));
-}
-
-// ── Navigation ──
-const SCREENS = ['calendar','day','coupon','settings'];
-function showScreen(name) {
-  SCREENS.forEach(n => {
-    const s = document.getElementById('screen-'+n);
-    if(s) { s.style.display = ''; s.classList.remove('active'); }
-  });
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const target = document.getElementById('screen-'+name);
-  if(target) { target.classList.add('active'); }
-  const nav = document.getElementById('nav-'+name);
-  if(nav) nav.classList.add('active');
-  if(name==='calendar') renderCalendar();
-  if(name==='coupon') renderCoupons();
-  if(name==='settings') renderSettings();
-}
-
-// ── Calendar ──
-function setCalMode(mode) {
-  calMode = mode;
-  document.getElementById('toggle-amount').classList.toggle('active', mode==='amount');
-  document.getElementById('toggle-coupon').classList.toggle('active', mode==='coupon');
-  renderCalendar();
-}
-
-function changeMonth(delta) {
-  currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth()+delta, 1);
-  renderCalendar();
-}
-
-function renderCalendar() {
-  const year = currentMonth.getFullYear();
-  const month = currentMonth.getMonth();
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('cal-month-label').textContent = months[month];
-  document.getElementById('cal-year-label').textContent = year;
-
-  // Monthly total
-  const monthStr = `${year}-${String(month+1).padStart(2,'0')}`;
-  const monthRecords = records.filter(r => r.date.startsWith(monthStr));
-  const monthTotal = monthRecords.reduce((s,r) => s + r.items.reduce((ss,i) => ss+i.price,0), 0);
-  document.getElementById('month-summary').innerHTML = `
-    <div class="month-summary-label">Monthly Total</div>
-    <div class="month-summary-amount">${monthTotal.toLocaleString()}<span>円</span></div>
-  `;
-
-  // Build grid
-  const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month+1, 0).getDate();
-  const grid = document.getElementById('cal-grid');
-  grid.innerHTML = '';
-
-  // Day total map
-  const dayTotals = {};
-  records.filter(r => r.date.startsWith(monthStr)).forEach(r => {
-    const d = r.date.split('-')[2];
-    dayTotals[d] = (dayTotals[d]||0) + r.items.reduce((s,i) => s+i.price, 0);
-  });
-
-  // Coupon expiry map
-  const couponDays = {};
-  coupons.filter(c => !c.used && c.exp.startsWith(monthStr)).forEach(c => {
-    const d = c.exp.split('-')[2];
-    if(!couponDays[d]) couponDays[d] = [];
-    couponDays[d].push(c);
-  });
-
-  for(let i=0;i<firstDay;i++) {
-    const cell = document.createElement('div');
-    cell.className='cal-cell empty';
-    grid.appendChild(cell);
-  }
-  for(let d=1;d<=daysInMonth;d++) {
-    const ds = String(d).padStart(2,'0');
-    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${ds}`;
-    const isToday = dateStr===todayStr;
-    const hasData = !!dayTotals[ds];
-    const hasCoupon = !!couponDays[ds];
-    const dow = new Date(year,month,d).getDay();
-
-    const cell = document.createElement('div');
-    cell.className = `cal-cell${isToday?' today':''}${hasData||hasCoupon?' has-data':''}${dow===0?' sun':dow===6?' sat':''}`;
-    cell.onclick = () => openDay(dateStr);
-
-    const hasSub = subscriptions.some(sub => getSubsForDate(dateStr).length > 0);
-    let inner = `<div class="cal-day">${d}</div>`;
-    if(calMode==='amount') {
-      const subTotal = getSubsForDate(dateStr).reduce((s,sub)=>s+sub.amount,0);
-      const total = (dayTotals[ds]||0) + subTotal;
-      if(total > 0) inner += `<div class="cal-amount">${total.toLocaleString()}</div>`;
-    } else if(calMode==='coupon') {
-      if(hasCoupon) inner += `<div class="cal-coupon-dot"></div>`;
-      if(hasSub) inner += `<div class="cal-sub-dot"></div>`;
-    }
-    cell.innerHTML = inner;
-    grid.appendChild(cell);
-  }
-}
-
-// ── Day view ──
-function openDay(dateStr) {
-  currentDate = dateStr;
-  showScreen('day');
-  document.getElementById('day-screen-title').textContent = fmtJP(dateStr);
-  renderDay(dateStr);
-}
-
-function renderDay(dateStr) {
-  const dayRecs = records.filter(r => r.date===dateStr);
-  const dayTotal = dayRecs.reduce((s,r) => s+r.items.reduce((ss,i)=>ss+i.price,0), 0);
-  let html = `
-    <div class="day-header">
-      <div class="day-date">${fmtJP(dateStr)}</div>
-      <div class="day-total-row">
-        <div class="day-total-label">合計</div>
-        <div class="day-total">${dayTotal.toLocaleString()} 円</div>
-      </div>
-    </div>`;
-
-  const daySubs = getSubsForDate(dateStr);
-  if(daySubs.length > 0) {
-    html += `<div class="section-label">サブスク請求</div>`;
-    daySubs.forEach(sub => {
-      html += `<div class="trip-card">
-        <div class="trip-card-header">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div class="trip-shop">${sub.name}</div>
-            <span class="sub-badge">${sub.cycle==='monthly'?'月次':'年次'}</span>
-          </div>
-          <div class="trip-total">${sub.amount.toLocaleString()}円</div>
-        </div>
-        <div class="trip-items">
-          <div class="trip-item">
-            <div class="trip-item-left">
-              ${sub.tags.map(t=>`<span class="tag-chip">${t}</span>`).join('')}
-            </div>
-          </div>
-        </div>
-      </div>`;
-    });
-  }
-  if(dayRecs.length===0 && daySubs.length===0) {
-    html += `<div class="empty-state"><div class="empty-icon">🛒</div>まだ記録がありません<br>買い物を追加してみましょう</div>`;
-  } else if(dayRecs.length > 0) {
-    html += `<div class="section-label">買い物</div>`;
-    dayRecs.forEach(r => {
-      const tripTotal = r.items.reduce((s,i)=>s+i.price,0);
-      const hasCoupon = coupons.some(c => !c.used && c.shop===r.shop);
-      html += `<div class="trip-card">
-        <div class="trip-card-header">
-          <div class="trip-shop">${r.shop}</div>
-          <div class="trip-total">${tripTotal.toLocaleString()}円</div>
-        </div>`;
-      if(hasCoupon) html += `<div class="coupon-notice">🎫 ${r.shop}のクーポンがあります</div>`;
-      html += `<div class="trip-items">`;
-      r.items.forEach(item => {
-        html += `<div class="trip-item">
-          <div class="trip-item-left">
-            <div class="trip-item-price">${item.price.toLocaleString()}円</div>
-            ${item.tags.map(t=>`<span class="tag-chip">${t}</span>`).join('')}
-          </div>
-        </div>`;
-      });
-      html += `</div></div>`;
-    });
-  }
-
-  html += `<div class="add-trip-btn" onclick="openShopForm('${dateStr}')"><span style="font-size:18px;color:var(--accent)">＋</span> 買い物を追加</div>`;
-  document.getElementById('day-content').innerHTML = html;
-}
-
-// ── Shop form ──
-function openShopForm(dateStr) {
-  currentDate = dateStr;
-  currentItems = [];
-  selectedTags = [];
-  document.getElementById('input-shop').value = '';
-  document.getElementById('input-price').value = '';
-  document.getElementById('coupon-notice').style.display = 'none';
-  document.getElementById('shop-form-title').textContent = `${fmtJP(dateStr)} の買い物`;
-  updateShopSuggestions();
-  renderTagGrid();
-  updateItemList();
-  updateSubtotal();
-  const panel = document.getElementById('shop-form');
-  panel.style.display='flex';
-  setTimeout(()=>panel.classList.add('open'),10);
-
-  document.getElementById('input-shop').addEventListener('input', function() {
-    const shop = this.value;
-    const has = coupons.some(c => !c.used && c.shop.includes(shop) && shop.length>0);
-    document.getElementById('coupon-notice').style.display = has ? 'flex' : 'none';
-  });
-}
-function closeShopForm() {
-  const panel = document.getElementById('shop-form');
-  panel.classList.remove('open');
-  setTimeout(()=>{ panel.style.display='none'; },300);
-}
-
-function updateShopSuggestions() {
-  const shops = [...new Set(records.map(r=>r.shop))];
-  const dl = document.getElementById('shop-suggestions');
-  dl.innerHTML = shops.map(s=>`<option value="${s}">`).join('');
-}
-
-function renderTagGrid() {
-  const grid = document.getElementById('tag-grid-input');
-  grid.innerHTML = tags.map(t => `
-    <div class="tag-select-btn${selectedTags.includes(t)?' selected':''}" onclick="toggleTag('${t}')">${t}</div>
-  `).join('');
-}
-
-function toggleTag(tag) {
-  if(selectedTags.includes(tag)) selectedTags = selectedTags.filter(t=>t!==tag);
-  else selectedTags.push(tag);
-  renderTagGrid();
-}
-
-function addItem() {
-  const price = parseInt(document.getElementById('input-price').value);
-  if(!price || price<=0) { alert('金額を入力してください'); return; }
-  currentItems.push({ price, tags:[...selectedTags] });
-  document.getElementById('input-price').value = '';
-  selectedTags = [];
-  renderTagGrid();
-  updateItemList();
-  updateSubtotal();
-}
-
-function removeItem(idx) {
-  currentItems.splice(idx,1);
-  updateItemList();
-  updateSubtotal();
-}
-
-function updateItemList() {
-  const list = document.getElementById('item-list');
-  if(currentItems.length===0) { list.innerHTML=''; return; }
-  list.innerHTML = currentItems.map((item,i) => `
-    <div class="item-row">
-      <div class="item-row-price">${item.price.toLocaleString()}円</div>
-      <div class="item-row-tags">${item.tags.map(t=>`<span class="tag-chip">${t}</span>`).join('')}</div>
-      <div class="item-row-del" onclick="removeItem(${i})">×</div>
-    </div>
-  `).join('');
-}
-
-function updateSubtotal() {
-  const total = currentItems.reduce((s,i)=>s+i.price,0);
-  document.getElementById('subtotal-display').textContent = total.toLocaleString();
-  document.getElementById('item-count-display').textContent = `${currentItems.length}点`;
-}
-
-async function saveTrip() {
-  const shop = document.getElementById('input-shop').value.trim();
-  if(!shop) { showToast('店名を入力してください', 'error'); return; }
-  if(currentItems.length===0) { showToast('商品を追加してください', 'error'); return; }
-  const trip = { date:currentDate, shop, items:[...currentItems] };
-  try {
-    const res = await gasPost({ action:'addRecord', ...trip });
-    trip.id = res.id || nextId++;
-    if(!shops.includes(shop)) shops.push(shop);
-    showToast('✓ 登録しました');
-  } catch(e) {
-    trip.id = nextId++;
-    showToast('保存に失敗しました（オフライン）', 'error');
-  }
-  records.push(trip);
-  closeShopForm();
-  renderDay(currentDate);
-}
-
-// ── Coupons ──
-function renderCoupons() {
-  // 無制限（exp空）→ 期限近い順 → 使用済み
-  const unlimited = coupons.filter(c => !c.used && !c.exp);
-  const active = coupons.filter(c => !c.used && c.exp).sort((a,b) => a.exp.localeCompare(b.exp));
-  const used = coupons.filter(c => c.used);
-  const sorted = [...unlimited, ...active, ...used];
-
-  const shopGroups = {};
-  sorted.forEach(c => {
-    if(!shopGroups[c.shop]) shopGroups[c.shop] = [];
-    shopGroups[c.shop].push(c);
-  });
-
-  let html = '';
-  let first = true;
-  for(const [shop, list] of Object.entries(shopGroups)) {
-    html += `<div class="section-shop-header${first?' first':''}">${shop}</div>`;
-    first = false;
-    html += `<div class="coupon-list">`;
-    list.forEach(c => {
-      const isUnlimited = !c.exp;
-      const days = isUnlimited ? null : daysUntil(c.exp);
-      const expClass = isUnlimited ? '' : (days<=3&&!c.used?'urgent':days<=7&&!c.used?'soon':'');
-      const expLabel = c.used ? '使用済み'
-        : isUnlimited ? '無制限'
-        : days < 0 ? '期限切れ'
-        : days === 0 ? '今日まで'
-        : `残${days}日`;
-      const expDisplay = isUnlimited ? '—' : c.exp.replace(/-/g,'/');
-      html += `<div class="coupon-card${c.used?' used':''}">
-        <div class="coupon-shop-row">
-          <div class="coupon-shop">${c.shop}</div>
-          ${isUnlimited ? '<div class="coupon-used-badge" style="color:var(--accent2);border-color:var(--accent2)">∞ 無制限</div>' : ''}
-          ${c.used ? '<div class="coupon-used-badge">Used</div>' : ''}
-        </div>
-        <div class="coupon-exp-row">
-          <div class="coupon-exp-label">Exp.</div>
-          <div class="coupon-exp ${expClass}">${expDisplay} <span style="font-size:10px;opacity:0.8">(${expLabel})</span></div>
-        </div>
-        ${c.memo ? `<div class="coupon-memo">${c.memo}</div>` : ''}
-        ${!c.used ? `<div class="coupon-actions">
-          <div class="coupon-action-btn use" onclick="markCouponUsed(${c.id})">使用済みにする</div>
-          <div class="coupon-action-btn" onclick="deleteCoupon(${c.id})">削除</div>
-        </div>` : ''}
-      </div>`;
-    });
-    html += `</div>`;
-  }
-  if(coupons.length === 0) html = `<div class="empty-state"><div class="empty-icon">🎫</div>クーポンがありません<br>＋ボタンから追加できます</div>`;
-  html += `<div class="add-coupon-btn" onclick="openCouponAdd()"><span style="font-size:18px;color:var(--accent)">＋</span> クーポンを追加</div>`;
-  document.getElementById('coupon-list-content').innerHTML = html;
-}
-
-async function markCouponUsed(id) {
-  const c = coupons.find(c=>c.id===id);
-  if(c) {
-    c.used = true;
-    try { await gasPost({ action:'updateCoupon', ...c }); } catch(e) {}
-  }
-  renderCoupons();
-}
-async function deleteCoupon(id) {
-  coupons = coupons.filter(c=>c.id!==id);
-  try { await gasPost({ action:'deleteCoupon', id }); } catch(e) {}
-  renderCoupons();
-}
-
-function openCouponAdd() {
-  document.getElementById('coupon-shop').value='';
-  document.getElementById('coupon-exp').value='';
-  document.getElementById('coupon-memo').value='';
-  const panel = document.getElementById('coupon-form');
-  panel.style.display='flex';
-  setTimeout(()=>panel.classList.add('open'),10);
-}
-function closeCouponForm() {
-  const panel = document.getElementById('coupon-form');
-  panel.classList.remove('open');
-  setTimeout(()=>{ panel.style.display='none'; },300);
-}
-function saveCoupon() {
-  const shop = document.getElementById('coupon-shop').value.trim();
-  const exp = document.getElementById('coupon-exp').value;
-  const memo = document.getElementById('coupon-memo').value.trim();
-  if(!shop) { alert('店名を入力してください'); return; }
-  if(!exp) { alert('有効期限を入力してください'); return; }
-  coupons.push({ id:nextId++, shop, exp, memo, used:false });
-  closeCouponForm();
-  renderCoupons();
-}
-
-// ── Settings ──
-let shops = [];
-
-function renderSettings() {
-  // Tags
-  const tagList = document.getElementById('tag-manage-list');
-  tagList.innerHTML = tags.map((t, i) => `
-    <div class="manage-item">
-      <div class="manage-item-name">${t}</div>
-      <div class="manage-item-actions">
-        <button class="manage-item-btn" onclick="renameTag(${i})">編集</button>
-        <button class="manage-item-btn del" onclick="deleteTag(${i})">削除</button>
-      </div>
-    </div>
-  `).join('');
-
-  // Subscriptions
-  renderSubManageList();
-
-  // Shops
-  const shopList = document.getElementById('shop-manage-list');
-  // Merge from records
-  const allShops = [...new Set([...shops, ...records.map(r=>r.shop)])];
-  shops = allShops;
-  shopList.innerHTML = allShops.map((s, i) => `
-    <div class="manage-item">
-      <div class="manage-item-name">${s}</div>
-      <div class="manage-item-actions">
-        <button class="manage-item-btn" onclick="renameShop(${i})">編集</button>
-        <button class="manage-item-btn del" onclick="deleteShop(${i})">削除</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function addTag() {
-  const input = document.getElementById('new-tag-input');
-  const val = input.value.trim();
-  if(!val) return;
-  if(tags.includes(val)) { showToast('同じ名前のタグが既にあります', 'error'); return; }
-  tags.push(val);
-  input.value = '';
-  renderSettings();
-  try { gasPost({ action:'saveTags', tags }); } catch(e) {}
-}
-
-function deleteTag(i) {
-  tags.splice(i, 1);
-  renderSettings();
-}
-
-function renameTag(i) {
-  const newName = prompt('新しいタグ名', tags[i]);
-  if(!newName || !newName.trim()) return;
-  const trimmed = newName.trim();
-  if(tags.includes(trimmed) && trimmed !== tags[i]) { showToast('同じ名前のタグが既にあります', 'error'); return; }
-  // Update in records too
-  records.forEach(r => r.items.forEach(item => {
-    const idx = item.tags.indexOf(tags[i]);
-    if(idx !== -1) item.tags[idx] = trimmed;
-  }));
-  tags[i] = trimmed;
-  renderSettings();
-  try { gasPost({ action:'saveTags', tags }); } catch(e) {}
-}
-
-function addShop() {
-  const input = document.getElementById('new-shop-input');
-  const val = input.value.trim();
-  if(!val) return;
-  if(shops.includes(val)) { showToast('同じ名前のお店が既にあります', 'error'); return; }
-  shops.push(val);
-  input.value = '';
-  renderSettings();
-  updateShopSuggestions();
-}
-
-function deleteShop(i) {
-  shops.splice(i, 1);
-  renderSettings();
-  updateShopSuggestions();
-}
-
-function renameShop(i) {
-  const newName = prompt('新しいお店名', shops[i]);
-  if(!newName || !newName.trim()) return;
-  const trimmed = newName.trim();
-  if(shops.includes(trimmed) && trimmed !== shops[i]) { showToast('同じ名前のお店が既にあります', 'error'); return; }
-  // Update in records too
-  records.forEach(r => { if(r.shop === shops[i]) r.shop = trimmed; });
-  coupons.forEach(c => { if(c.shop === shops[i]) c.shop = trimmed; });
-  shops[i] = trimmed;
-  renderSettings();
-  updateShopSuggestions();
-}
-
-
-// ── Subscriptions ──
-let subscriptions = [];
-let subSelectedTags = [];
-let subEditId = null;
-let subCycle = 'monthly';
-
-function getSubDatesForMonth(sub, year, month) {
-  // その月に請求が来る日付を返す
-  const monthStr = `${year}-${String(month+1).padStart(2,'0')}`;
-  const results = [];
-  const base = new Date(sub.nextDate + 'T00:00:00');
-  // 過去・現在・未来の請求日を全月分チェック
-  // nextDateを基点にサイクルで前後展開
-  let d = new Date(base);
-  // 未来方向
-  while(true) {
-    const ds = fmt(d);
-    if(ds.startsWith(monthStr)) { results.push(ds); }
-    if(d.getFullYear() > year + 1) break;
-    if(sub.cycle === 'monthly') d.setMonth(d.getMonth()+1);
-    else d.setFullYear(d.getFullYear()+1);
-  }
-  // 過去方向
-  d = new Date(base);
-  if(sub.cycle === 'monthly') d.setMonth(d.getMonth()-1);
-  else d.setFullYear(d.getFullYear()-1);
-  while(true) {
-    const ds = fmt(d);
-    if(ds.startsWith(monthStr)) { results.push(ds); }
-    if(d.getFullYear() < year - 1) break;
-    if(sub.cycle === 'monthly') d.setMonth(d.getMonth()-1);
-    else d.setFullYear(d.getFullYear()-1);
-  }
-  return results;
-}
-
-function getSubsForDate(dateStr) {
-  const [year, month] = dateStr.split('-').map(Number);
-  return subscriptions.filter(sub => {
-    const dates = getSubDatesForMonth(sub, year, month-1);
-    return dates.includes(dateStr);
-  });
-}
-
-function renderSubManageList() {
-  const list = document.getElementById('sub-manage-list');
-  if(!list) return;
-  if(subscriptions.length === 0) {
-    list.innerHTML = '<div style="color:var(--text-dim);font-size:12px;padding:8px 0">まだ登録がありません</div>';
-    return;
-  }
-  list.innerHTML = subscriptions.map((s,i) => `
-    <div class="manage-item">
-      <div style="flex:1">
-        <div class="manage-item-name">${s.name}</div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-dim);margin-top:2px">
-          ${s.amount.toLocaleString()}円 / ${s.cycle==='monthly'?'月次':'年次'} — 次回 ${s.nextDate.replace(/-/g,'/')}
-        </div>
-      </div>
-      <div class="manage-item-actions">
-        <button class="manage-item-btn" onclick="editSub(${i})">編集</button>
-        <button class="manage-item-btn del" onclick="deleteSub(${i})">削除</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function openSubForm(editIdx=null) {
-  subEditId = editIdx;
-  subCycle = 'monthly';
-  subSelectedTags = [];
-  if(editIdx !== null) {
-    const s = subscriptions[editIdx];
-    document.getElementById('sub-form-title').textContent = 'サブスクを編集';
-    document.getElementById('sub-name').value = s.name;
-    document.getElementById('sub-amount').value = s.amount;
-    document.getElementById('sub-next').value = s.nextDate;
-    subCycle = s.cycle;
-    subSelectedTags = [...s.tags];
-  } else {
-    document.getElementById('sub-form-title').textContent = 'サブスクを追加';
-    document.getElementById('sub-name').value = '';
-    document.getElementById('sub-amount').value = '';
-    document.getElementById('sub-next').value = '';
-  }
-  selectCycle(subCycle);
-  renderSubTagGrid();
-  // 編集時のみ削除ボタン表示
-  document.getElementById('sub-delete-btn').style.display = editIdx !== null ? 'block' : 'none';
-  const panel = document.getElementById('sub-form');
-  panel.style.display = 'flex';
-  setTimeout(() => panel.classList.add('open'), 10);
-}
-
-async function deleteSubFromForm() {
-  if(subEditId === null) return;
-  const id = subscriptions[subEditId].id;
-  subscriptions.splice(subEditId, 1);
-  try { await gasPost({ action:'deleteSub', id }); } catch(e) {}
-  closeSubForm();
-  renderSubManageList();
-}
-
-function closeSubForm() {
-  const panel = document.getElementById('sub-form');
-  panel.classList.remove('open');
-  setTimeout(() => { panel.style.display = 'none'; }, 300);
-}
-
-function selectCycle(c) {
-  subCycle = c;
-  document.getElementById('cycle-monthly').classList.toggle('active', c==='monthly');
-  document.getElementById('cycle-yearly').classList.toggle('active', c==='yearly');
-}
-
-function renderSubTagGrid() {
-  const grid = document.getElementById('sub-tag-grid');
-  grid.innerHTML = tags.map(t => `
-    <div class="tag-select-btn${subSelectedTags.includes(t)?' selected':''}" onclick="toggleSubTag('${t}')">${t}</div>
-  `).join('');
-}
-
-function toggleSubTag(tag) {
-  if(subSelectedTags.includes(tag)) subSelectedTags = subSelectedTags.filter(t=>t!==tag);
-  else subSelectedTags.push(tag);
-  renderSubTagGrid();
-}
-
-async function saveSub() {
-  const name = document.getElementById('sub-name').value.trim();
-  const amount = parseInt(document.getElementById('sub-amount').value);
-  const nextDate = document.getElementById('sub-next').value;
-  if(!name) { showToast('サービス名を入力してください', 'error'); return; }
-  if(!amount || amount <= 0) { showToast('金額を入力してください', 'error'); return; }
-  if(!nextDate) { showToast('次回請求日を入力してください', 'error'); return; }
-  const sub = { name, amount, cycle:subCycle, nextDate, tags:[...subSelectedTags] };
-  if(subEditId !== null) {
-    sub.id = subscriptions[subEditId].id;
-    subscriptions[subEditId] = sub;
-    try { await gasPost({ action:'updateSub', ...sub }); } catch(e) {}
-  } else {
-    try {
-      const res = await gasPost({ action:'addSub', ...sub });
-      sub.id = res.id || nextId++;
-    } catch(e) { sub.id = nextId++; }
-    subscriptions.push(sub);
-  }
-  closeSubForm();
-  renderSubManageList();
-}
-
-function editSub(i) { openSubForm(i); }
-
-function deleteSub(i) {
-  subscriptions.splice(i, 1);
-  renderSubManageList();
-}
-
-// ── Init ──
-async function init() {
-  // まずUIを表示してからGASを読み込む
-  showScreen('calendar');
-  try {
-    const data = await Promise.race([
-      gasGet({ action: 'getAll' }),
-      new Promise((_,reject) => setTimeout(() => reject(new Error('timeout')), 10000))
-    ]);
-    if(data) {
-      records       = data.records   || data['レコード']  || [];
-      coupons       = data.coupons   || data['クーポン']  || [];
-      const t       = data.tags      || data['タグ']      || [];
-      if(t.length) tags = t;
-      shops         = data.shops     || data['ショップ']  || [];
-      subscriptions = data.subs      || data['購読']      || [];
-      renderCalendar();
-    }
-  } catch(e) {
-    console.error('GAS読み込みエラー:', e);
-  }
-}
-init();
-</script>
-<!-- ===== SUBSCRIPTION FORM ===== -->
-<div class="form-panel" id="sub-form">
-  <div class="form-topbar">
-    <div class="form-title" id="sub-form-title">サブスクを追加</div>
-    <div class="form-close" onclick="closeSubForm()">×</div>
+<!-- SUB FORM PANEL -->
+<div class="panel" id="sub-panel">
+  <div class="panel-head">
+    <div class="panel-title" id="sub-panel-title">サブスクを追加</div>
+    <div class="panel-close" onclick="closePanel('sub-panel')">×</div>
   </div>
-  <div class="form-body">
+  <div class="panel-body">
     <div class="form-group">
       <label class="form-label">サービス名</label>
       <input class="form-input" id="sub-name" placeholder="例：Netflix、Spotify">
@@ -1176,9 +325,9 @@ init();
     </div>
     <div class="form-group">
       <label class="form-label">請求サイクル</label>
-      <div style="display:flex;gap:8px">
-        <div class="sub-cycle-btn active" id="cycle-monthly" onclick="selectCycle('monthly')">月次</div>
-        <div class="sub-cycle-btn" id="cycle-yearly" onclick="selectCycle('yearly')">年次</div>
+      <div class="cycle-btns">
+        <div class="cycle-btn on" id="cycle-m" onclick="setCycle('monthly')">月次</div>
+        <div class="cycle-btn" id="cycle-y" onclick="setCycle('yearly')">年次</div>
       </div>
     </div>
     <div class="form-group">
@@ -1187,12 +336,445 @@ init();
     </div>
     <div class="form-group">
       <label class="form-label">タグ</label>
-      <div class="tag-grid" id="sub-tag-grid"></div>
+      <div id="sub-tag-grid" class="tag-grid"></div>
     </div>
-    <button class="btn-primary" onclick="saveSub()">登録する</button>
-    <button class="btn-secondary" onclick="closeSubForm()">キャンセル</button>
-    <button class="btn-secondary" id="sub-delete-btn" style="display:none;margin-top:10px;color:var(--red);border-color:rgba(224,120,120,0.4)" onclick="deleteSubFromForm()">このサブスクを削除</button>
+    <div class="btn-primary" onclick="saveSub()">登録する</div>
+    <div class="btn-secondary" style="text-align:center;cursor:pointer" onclick="closePanel('sub-panel')">キャンセル</div>
+    <div class="btn-danger" id="sub-del-btn" onclick="deleteSub()">このサブスクを削除</div>
   </div>
 </div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const GAS = 'https://script.google.com/macros/s/AKfycbzdJY__eIbZ5GSvzkuGXsMHu8XiRk-RHZUlaD4qPrHng55Bwx8m94bBvrzL4O-CsEhx/exec';
+
+// ── utils ──
+function fmt(d) {
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function fmtJP(s) {
+  const d = new Date(s+'T00:00:00');
+  return (d.getMonth()+1)+'月'+d.getDate()+'日';
+}
+function daysUntil(s) {
+  return Math.ceil((new Date(s+'T00:00:00') - new Date(todayStr+'T00:00:00')) / 86400000);
+}
+let _toastTimer;
+function toast(msg, type='ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast ' + type;
+  void el.offsetWidth;
+  el.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+// ── state ──
+const today = new Date();
+const todayStr = fmt(today);
+let records = [], coupons = [], tags = ['食費','日用品','交通費','娯楽','医療','その他'], shops = [], subs = [];
+let curMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+let calMode = 'amount';
+let curDate = null;
+let curItems = [], selTags = [], nextId = 100;
+let subEditIdx = null, subCycle = 'monthly', subSelTags = [];
+
+// ── GAS ──
+async function gasGet(p) {
+  const r = await fetch(GAS + '?' + new URLSearchParams(p), {redirect:'follow'});
+  return r.json();
+}
+async function gasPost(b) {
+  try {
+    const r = await fetch(GAS, {method:'POST', redirect:'follow', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(b)});
+    return r.json();
+  } catch(e) { return {error:e.message}; }
+}
+
+// ── navigation ──
+function goScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('s-'+name).classList.add('active');
+  const nav = document.getElementById('nav-'+name);
+  if(nav) nav.classList.add('active');
+  if(name === 'calendar') renderCalendar();
+  if(name === 'coupon') renderCoupons();
+  if(name === 'settings') renderSettings();
+}
+function openPanel(id) {
+  const p = document.getElementById(id);
+  p.style.display = 'flex';
+  requestAnimationFrame(() => requestAnimationFrame(() => p.classList.add('open')));
+}
+function closePanel(id) {
+  const p = document.getElementById(id);
+  p.classList.remove('open');
+  setTimeout(() => { p.style.display = 'none'; }, 300);
+}
+
+// ── calendar ──
+function setMode(m) {
+  calMode = m;
+  document.getElementById('tog-amount').classList.toggle('active', m==='amount');
+  document.getElementById('tog-coupon').classList.toggle('active', m==='coupon');
+  renderCalendar();
+}
+function moveMonth(d) {
+  curMonth = new Date(curMonth.getFullYear(), curMonth.getMonth()+d, 1);
+  renderCalendar();
+}
+function renderCalendar() {
+  const y = curMonth.getFullYear(), m = curMonth.getMonth();
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-month').textContent = months[m];
+  document.getElementById('cal-year').textContent = y;
+  const ms = y+'-'+String(m+1).padStart(2,'0');
+  const dayTotals = {};
+  records.filter(r => r.date.startsWith(ms)).forEach(r => {
+    const d = r.date.split('-')[2];
+    dayTotals[d] = (dayTotals[d]||0) + r.items.reduce((s,i) => s+i.price, 0);
+  });
+  const couponDays = {};
+  coupons.filter(c => !c.used && c.exp && c.exp.startsWith(ms)).forEach(c => {
+    couponDays[c.exp.split('-')[2]] = true;
+  });
+  const monthTotal = Object.values(dayTotals).reduce((s,v)=>s+v,0)
+    + subs.reduce((s,sub) => s + getSubDates(sub,y,m).length * sub.amount, 0);
+  document.getElementById('cal-summary').innerHTML =
+    '<div class="summary-label">Monthly Total</div><div class="summary-amount">'+monthTotal.toLocaleString()+'<span>円</span></div>';
+  const first = new Date(y,m,1).getDay();
+  const days = new Date(y,m+1,0).getDate();
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+  for(let i=0;i<first;i++) { const c=document.createElement('div'); c.className='cal-cell empty'; grid.appendChild(c); }
+  for(let d=1;d<=days;d++) {
+    const ds = String(d).padStart(2,'0');
+    const dateStr = ms+'-'+ds;
+    const dow = new Date(y,m,d).getDay();
+    const subAmt = subs.reduce((s,sub) => getSubDates(sub,y,m).includes(dateStr) ? s+sub.amount : s, 0);
+    const total = (dayTotals[ds]||0) + subAmt;
+    const hasCoupon = !!couponDays[ds];
+    const hasSub = subAmt > 0;
+    const isToday = dateStr === todayStr;
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell'+(isToday?' today':'')+(total>0||hasCoupon?' has-data':'')+(dow===0?' sun':dow===6?' sat':'');
+    cell.onclick = () => openDay(dateStr);
+    let html = '<div class="cal-day">'+d+'</div>';
+    if(calMode==='amount' && total>0) html += '<div class="cal-amt">'+total.toLocaleString()+'</div>';
+    if(calMode==='coupon') {
+      if(hasCoupon) html += '<div class="dot red"></div>';
+      if(hasSub) html += '<div class="dot green"></div>';
+    }
+    cell.innerHTML = html;
+    grid.appendChild(cell);
+  }
+}
+
+// ── day ──
+function openDay(dateStr) {
+  curDate = dateStr;
+  document.getElementById('day-title').textContent = fmtJP(dateStr);
+  renderDay();
+  goScreen('day');
+}
+function renderDay() {
+  const recs = records.filter(r => r.date === curDate);
+  const daySubs = subs.filter(sub => {
+    const [y,m] = curDate.split('-').map(Number);
+    return getSubDates(sub, y, m-1).includes(curDate);
+  });
+  const total = recs.reduce((s,r) => s+r.items.reduce((ss,i)=>ss+i.price,0), 0)
+    + daySubs.reduce((s,sub)=>s+sub.amount,0);
+  let html = '<div class="day-header"><div class="day-date">'+fmtJP(curDate)+'</div><div class="day-total">'+total.toLocaleString()+' 円</div></div>';
+  if(daySubs.length > 0) {
+    html += '<div class="sec-label">サブスク請求</div>';
+    daySubs.forEach(sub => {
+      html += '<div class="trip-card"><div class="trip-head"><div class="trip-shop">'+sub.name+' <span class="sub-badge">'+(sub.cycle==='monthly'?'月次':'年次')+'</span></div><div class="trip-total">'+sub.amount.toLocaleString()+'円</div></div><div class="trip-items"><div class="trip-item">'+sub.tags.map(t=>'<span class="tag-chip">'+t+'</span>').join('')+'</div></div></div>';
+    });
+  }
+  if(recs.length > 0) {
+    html += '<div class="sec-label">買い物</div>';
+    recs.forEach(r => {
+      const rt = r.items.reduce((s,i)=>s+i.price,0);
+      const hc = coupons.some(c => !c.used && c.shop===r.shop);
+      html += '<div class="trip-card"><div class="trip-head"><div class="trip-shop">'+r.shop+'</div><div class="trip-total">'+rt.toLocaleString()+'円</div></div>';
+      if(hc) html += '<div class="coupon-alert">🎫 '+r.shop+'のクーポンがあります</div>';
+      html += '<div class="trip-items">'+r.items.map(item => '<div class="trip-item"><div class="trip-price">'+item.price.toLocaleString()+'円</div>'+item.tags.map(t=>'<span class="tag-chip">'+t+'</span>').join('')+'</div>').join('')+'</div></div>';
+    });
+  }
+  if(recs.length===0 && daySubs.length===0) html += '<div class="empty-state">🛒<br>まだ記録がありません</div>';
+  html += '<div class="add-btn" onclick="openShopForm()"><span style="font-size:18px;color:var(--accent)">＋</span> 買い物を追加</div>';
+  document.getElementById('day-body').innerHTML = html;
+}
+
+// ── shop form ──
+function openShopForm() {
+  curItems = []; selTags = [];
+  document.getElementById('shop-input').value = '';
+  document.getElementById('price-input').value = '';
+  document.getElementById('shop-coupon-alert').style.display = 'none';
+  document.getElementById('shop-panel-title').textContent = fmtJP(curDate)+' の買い物';
+  updateShopDatalist();
+  renderShopTags();
+  updateItemList();
+  openPanel('shop-panel');
+  document.getElementById('shop-input').oninput = function() {
+    const has = this.value && coupons.some(c => !c.used && c.shop.includes(this.value));
+    document.getElementById('shop-coupon-alert').style.display = has ? 'block' : 'none';
+  };
+}
+function updateShopDatalist() {
+  document.getElementById('shop-datalist').innerHTML = shops.map(s=>'<option value="'+s+'">').join('');
+}
+function renderShopTags() {
+  document.getElementById('shop-tag-grid').innerHTML = tags.map(t =>
+    '<div class="tag-btn'+(selTags.includes(t)?' on':'')+'" onclick="toggleTag(\'' + t + '\')">'+t+'</div>'
+  ).join('');
+}
+function toggleTag(t) {
+  selTags.includes(t) ? selTags.splice(selTags.indexOf(t),1) : selTags.push(t);
+  renderShopTags();
+}
+function addItem() {
+  const price = parseInt(document.getElementById('price-input').value);
+  if(!price || price <= 0) { toast('金額を入力してください','err'); return; }
+  curItems.push({price, tags:[...selTags]});
+  document.getElementById('price-input').value = '';
+  selTags = [];
+  renderShopTags();
+  updateItemList();
+}
+function removeItem(i) {
+  curItems.splice(i,1);
+  updateItemList();
+}
+function updateItemList() {
+  const list = document.getElementById('shop-item-list');
+  list.innerHTML = curItems.map((item,i) =>
+    '<div class="item-row"><div class="trip-price">'+item.price.toLocaleString()+'円</div>'+
+    item.tags.map(t=>'<span class="tag-chip">'+t+'</span>').join('')+
+    '<div class="item-del" onclick="removeItem('+i+')">×</div></div>'
+  ).join('');
+  document.getElementById('subtotal').innerHTML = curItems.reduce((s,i)=>s+i.price,0).toLocaleString()+'<span style="font-family:DM Mono,monospace;font-size:12px;color:var(--dim)"> 円</span>';
+  document.getElementById('item-count').textContent = curItems.length+'点';
+}
+async function saveTrip() {
+  const shop = document.getElementById('shop-input').value.trim();
+  if(!shop) { toast('店名を入力してください','err'); return; }
+  if(curItems.length === 0) { toast('商品を追加してください','err'); return; }
+  const trip = {date:curDate, shop, items:[...curItems]};
+  records.push(trip);
+  if(!shops.includes(shop)) { shops.push(shop); updateShopDatalist(); }
+  closePanel('shop-panel');
+  renderDay();
+  renderCalendar();
+  try {
+    const res = await gasPost({action:'addRecord', ...trip});
+    trip.id = res.id || nextId++;
+    toast('✓ 登録しました');
+  } catch(e) {
+    trip.id = nextId++;
+    toast('保存に失敗しました','err');
+  }
+}
+
+// ── coupons ──
+function renderCoupons() {
+  const unlimited = coupons.filter(c => !c.used && !c.exp);
+  const active = coupons.filter(c => !c.used && c.exp).sort((a,b) => a.exp.localeCompare(b.exp));
+  const used = coupons.filter(c => c.used);
+  const shopGroups = {};
+  [...unlimited,...active,...used].forEach(c => {
+    if(!shopGroups[c.shop]) shopGroups[c.shop] = [];
+    shopGroups[c.shop].push(c);
+  });
+  let html = '';
+  let first = true;
+  for(const [shop, list] of Object.entries(shopGroups)) {
+    html += '<div class="shop-header'+(first?' style=\"border-top:none;margin-top:0\"':'')+'">'+shop+'</div><div class="coupon-list">';
+    first = false;
+    list.forEach(c => {
+      const unl = !c.exp;
+      const days = unl ? null : daysUntil(c.exp);
+      const expCls = unl ? '' : (days<=3&&!c.used?'urgent':days<=7&&!c.used?'soon':'');
+      const expLabel = c.used?'使用済み':unl?'無制限':days<0?'期限切れ':days===0?'今日まで':'残'+days+'日';
+      html += '<div class="coupon-card'+(c.used?' used':'')+'"><div class="coupon-top"><div class="coupon-shop">'+c.shop+'</div>'+(unl?'<div class="badge unlimited">∞ 無制限</div>':c.used?'<div class="badge used-badge">Used</div>':'')+'</div>';
+      html += '<div class="coupon-exp '+expCls+'">'+(unl?'—':c.exp.replace(/-/g,'/'))+'　<span style="font-size:10px;opacity:.8">('+expLabel+')</span></div>';
+      if(c.memo) html += '<div class="coupon-memo">'+c.memo+'</div>';
+      if(!c.used) html += '<div class="coupon-actions"><div class="coupon-btn use" onclick="useCoupon('+c.id+')">使用済みにする</div><div class="coupon-btn" onclick="delCoupon('+c.id+')">削除</div></div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+  if(!coupons.length) html = '<div class="empty-state">🎫<br>クーポンがありません</div>';
+  html += '<div class="add-btn" onclick="openPanel(\'coupon-panel\')"><span style="font-size:18px;color:var(--accent)">＋</span> クーポンを追加</div>';
+  document.getElementById('coupon-body').innerHTML = html;
+}
+async function saveCoupon() {
+  const shop = document.getElementById('coupon-shop').value.trim();
+  if(!shop) { toast('店名を入力してください','err'); return; }
+  const coupon = {id:nextId++, shop, exp:document.getElementById('coupon-exp').value, memo:document.getElementById('coupon-memo').value.trim(), used:false};
+  coupons.push(coupon);
+  closePanel('coupon-panel');
+  renderCoupons();
+  try {
+    const res = await gasPost({action:'addCoupon', ...coupon});
+    coupon.id = res.id || coupon.id;
+    toast('✓ クーポンを登録しました');
+  } catch(e) { toast('保存に失敗しました','err'); }
+}
+async function useCoupon(id) {
+  const c = coupons.find(c=>c.id===id);
+  if(c) { c.used = true; renderCoupons(); try { await gasPost({action:'updateCoupon',...c}); } catch(e){} }
+}
+async function delCoupon(id) {
+  coupons = coupons.filter(c=>c.id!==id);
+  renderCoupons();
+  try { await gasPost({action:'deleteCoupon',id}); } catch(e){}
+}
+
+// ── subscriptions ──
+function getSubDates(sub, y, m) {
+  const ms = y+'-'+String(m+1).padStart(2,'0');
+  const results = [];
+  const base = new Date(sub.nextDate+'T00:00:00');
+  const step = d => { if(sub.cycle==='monthly') d.setMonth(d.getMonth()+1); else d.setFullYear(d.getFullYear()+1); };
+  const stepBack = d => { if(sub.cycle==='monthly') d.setMonth(d.getMonth()-1); else d.setFullYear(d.getFullYear()-1); };
+  let d = new Date(base);
+  for(let i=0;i<24;i++) { if(fmt(d).startsWith(ms)) results.push(fmt(d)); step(d); }
+  d = new Date(base); stepBack(d);
+  for(let i=0;i<24;i++) { if(fmt(d).startsWith(ms)) results.push(fmt(d)); stepBack(d); }
+  return results;
+}
+function setCycle(c) {
+  subCycle = c;
+  document.getElementById('cycle-m').classList.toggle('on', c==='monthly');
+  document.getElementById('cycle-y').classList.toggle('on', c==='yearly');
+}
+function renderSubTags() {
+  document.getElementById('sub-tag-grid').innerHTML = tags.map(t =>
+    '<div class="tag-btn'+(subSelTags.includes(t)?' on':'')+'" onclick="toggleSubTag(\'' + t + '\')">'+t+'</div>'
+  ).join('');
+}
+function toggleSubTag(t) {
+  subSelTags.includes(t) ? subSelTags.splice(subSelTags.indexOf(t),1) : subSelTags.push(t);
+  renderSubTags();
+}
+function openSubForm(idx=null) {
+  subEditIdx = idx; subCycle = 'monthly'; subSelTags = [];
+  if(idx !== null) {
+    const s = subs[idx];
+    document.getElementById('sub-panel-title').textContent = 'サブスクを編集';
+    document.getElementById('sub-name').value = s.name;
+    document.getElementById('sub-amount').value = s.amount;
+    document.getElementById('sub-next').value = s.nextDate;
+    subCycle = s.cycle; subSelTags = [...s.tags];
+    document.getElementById('sub-del-btn').style.display = 'block';
+  } else {
+    document.getElementById('sub-panel-title').textContent = 'サブスクを追加';
+    document.getElementById('sub-name').value = '';
+    document.getElementById('sub-amount').value = '';
+    document.getElementById('sub-next').value = '';
+    document.getElementById('sub-del-btn').style.display = 'none';
+  }
+  setCycle(subCycle); renderSubTags();
+  openPanel('sub-panel');
+}
+async function saveSub() {
+  const name = document.getElementById('sub-name').value.trim();
+  const amount = parseInt(document.getElementById('sub-amount').value);
+  const nextDate = document.getElementById('sub-next').value;
+  if(!name) { toast('サービス名を入力してください','err'); return; }
+  if(!amount||amount<=0) { toast('金額を入力してください','err'); return; }
+  if(!nextDate) { toast('次回請求日を入力してください','err'); return; }
+  const sub = {name, amount, cycle:subCycle, nextDate, tags:[...subSelTags]};
+  if(subEditIdx !== null) {
+    sub.id = subs[subEditIdx].id;
+    subs[subEditIdx] = sub;
+    try { await gasPost({action:'updateSub',...sub}); toast('✓ 更新しました'); } catch(e) { toast('保存に失敗しました','err'); }
+  } else {
+    sub.id = nextId++;
+    subs.push(sub);
+    try { const res = await gasPost({action:'addSub',...sub}); sub.id=res.id||sub.id; toast('✓ 登録しました'); } catch(e) { toast('保存に失敗しました','err'); }
+  }
+  closePanel('sub-panel');
+  renderSettings();
+  renderCalendar();
+}
+async function deleteSub() {
+  if(subEditIdx===null) return;
+  const id = subs[subEditIdx].id;
+  subs.splice(subEditIdx,1);
+  closePanel('sub-panel');
+  renderSettings();
+  renderCalendar();
+  try { await gasPost({action:'deleteSub',id}); } catch(e){}
+}
+
+// ── settings ──
+function renderSettings() {
+  document.getElementById('tag-list').innerHTML = tags.map((t,i) =>
+    '<div class="manage-item"><div class="manage-name">'+t+'</div><div class="manage-actions"><div class="manage-btn" onclick="renameTag('+i+')">編集</div><div class="manage-btn del" onclick="removeTag('+i+')">削除</div></div></div>'
+  ).join('') || '<div style="color:var(--dim);font-size:12px">まだありません</div>';
+  const allShops = [...new Set([...shops, ...records.map(r=>r.shop)])];
+  shops = allShops;
+  document.getElementById('shop-list').innerHTML = allShops.map((s,i) =>
+    '<div class="manage-item"><div class="manage-name">'+s+'</div><div class="manage-actions"><div class="manage-btn" onclick="renameShop('+i+')">編集</div><div class="manage-btn del" onclick="removeShop('+i+')">削除</div></div></div>'
+  ).join('') || '<div style="color:var(--dim);font-size:12px">まだありません</div>';
+  document.getElementById('sub-list').innerHTML = subs.map((s,i) =>
+    '<div class="manage-item"><div style="flex:1"><div class="manage-name">'+s.name+'</div><div class="manage-sub">'+s.amount.toLocaleString()+'円 / '+(s.cycle==='monthly'?'月次':'年次')+' — 次回 '+s.nextDate.replace(/-/g,'/')+'</div></div><div class="manage-actions"><div class="manage-btn" onclick="openSubForm('+i+')">編集</div></div></div>'
+  ).join('') || '<div style="color:var(--dim);font-size:12px">まだありません</div>';
+}
+function addTag() {
+  const v = document.getElementById('new-tag').value.trim();
+  if(!v || tags.includes(v)) { toast('タグ名を確認してください','err'); return; }
+  tags.push(v); document.getElementById('new-tag').value = '';
+  renderSettings();
+  try { gasPost({action:'saveTags',tags}); } catch(e){}
+}
+function removeTag(i) { tags.splice(i,1); renderSettings(); try { gasPost({action:'saveTags',tags}); } catch(e){} }
+function renameTag(i) {
+  const v = prompt('新しいタグ名', tags[i]);
+  if(!v||!v.trim()) return;
+  records.forEach(r => r.items.forEach(item => { const idx=item.tags.indexOf(tags[i]); if(idx!==-1) item.tags[idx]=v.trim(); }));
+  tags[i] = v.trim(); renderSettings();
+  try { gasPost({action:'saveTags',tags}); } catch(e){}
+}
+function addShop() {
+  const v = document.getElementById('new-shop').value.trim();
+  if(!v || shops.includes(v)) { toast('お店名を確認してください','err'); return; }
+  shops.push(v); document.getElementById('new-shop').value = '';
+  renderSettings(); updateShopDatalist();
+}
+function removeShop(i) { shops.splice(i,1); renderSettings(); updateShopDatalist(); }
+function renameShop(i) {
+  const v = prompt('新しいお店名', shops[i]);
+  if(!v||!v.trim()) return;
+  records.forEach(r => { if(r.shop===shops[i]) r.shop=v.trim(); });
+  coupons.forEach(c => { if(c.shop===shops[i]) c.shop=v.trim(); });
+  shops[i] = v.trim(); renderSettings(); updateShopDatalist();
+}
+
+// ── init ──
+goScreen('calendar');
+async function loadData() {
+  try {
+    const data = await Promise.race([
+      gasGet({action:'getAll'}),
+      new Promise((_,rej) => setTimeout(()=>rej(new Error('timeout')),12000))
+    ]);
+    if(data.records) records = data.records;
+    if(data.coupons) coupons = data.coupons;
+    if(data.tags&&data.tags.length) tags = data.tags;
+    if(data.shops) shops = data.shops;
+    if(data.subs) subs = data.subs;
+    renderCalendar();
+  } catch(e) { console.warn('GAS load failed:', e); }
+}
+loadData();
+</script>
 </body>
 </html>
