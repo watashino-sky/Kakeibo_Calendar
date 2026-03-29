@@ -771,8 +771,8 @@ function updateSubtotal() {
 
 async function saveTrip() {
   const shop = document.getElementById('input-shop').value.trim();
-  if(!shop) { alert('店名を入力してください'); return; }
-  if(currentItems.length===0) { alert('商品を1つ以上追加してください'); return; }
+  if(!shop) { showToast('店名を入力してください', 'error'); return; }
+  if(currentItems.length===0) { showToast('商品を追加してください', 'error'); return; }
   const trip = { date:currentDate, shop, items:[...currentItems] };
   try {
     const res = await gasPost({ action:'addRecord', ...trip });
@@ -919,7 +919,7 @@ function addTag() {
   const input = document.getElementById('new-tag-input');
   const val = input.value.trim();
   if(!val) return;
-  if(tags.includes(val)) { alert('同じ名前のタグが既にあります'); return; }
+  if(tags.includes(val)) { showToast('同じ名前のタグが既にあります', 'error'); return; }
   tags.push(val);
   input.value = '';
   renderSettings();
@@ -935,7 +935,7 @@ function renameTag(i) {
   const newName = prompt('新しいタグ名', tags[i]);
   if(!newName || !newName.trim()) return;
   const trimmed = newName.trim();
-  if(tags.includes(trimmed) && trimmed !== tags[i]) { alert('同じ名前のタグが既にあります'); return; }
+  if(tags.includes(trimmed) && trimmed !== tags[i]) { showToast('同じ名前のタグが既にあります', 'error'); return; }
   // Update in records too
   records.forEach(r => r.items.forEach(item => {
     const idx = item.tags.indexOf(tags[i]);
@@ -950,7 +950,7 @@ function addShop() {
   const input = document.getElementById('new-shop-input');
   const val = input.value.trim();
   if(!val) return;
-  if(shops.includes(val)) { alert('同じ名前のお店が既にあります'); return; }
+  if(shops.includes(val)) { showToast('同じ名前のお店が既にあります', 'error'); return; }
   shops.push(val);
   input.value = '';
   renderSettings();
@@ -967,7 +967,7 @@ function renameShop(i) {
   const newName = prompt('新しいお店名', shops[i]);
   if(!newName || !newName.trim()) return;
   const trimmed = newName.trim();
-  if(shops.includes(trimmed) && trimmed !== shops[i]) { alert('同じ名前のお店が既にあります'); return; }
+  if(shops.includes(trimmed) && trimmed !== shops[i]) { showToast('同じ名前のお店が既にあります', 'error'); return; }
   // Update in records too
   records.forEach(r => { if(r.shop === shops[i]) r.shop = trimmed; });
   coupons.forEach(c => { if(c.shop === shops[i]) c.shop = trimmed; });
@@ -1109,9 +1109,9 @@ async function saveSub() {
   const name = document.getElementById('sub-name').value.trim();
   const amount = parseInt(document.getElementById('sub-amount').value);
   const nextDate = document.getElementById('sub-next').value;
-  if(!name) { alert('サービス名を入力してください'); return; }
-  if(!amount || amount <= 0) { alert('金額を入力してください'); return; }
-  if(!nextDate) { alert('次回請求日を入力してください'); return; }
+  if(!name) { showToast('サービス名を入力してください', 'error'); return; }
+  if(!amount || amount <= 0) { showToast('金額を入力してください', 'error'); return; }
+  if(!nextDate) { showToast('次回請求日を入力してください', 'error'); return; }
   const sub = { name, amount, cycle:subCycle, nextDate, tags:[...subSelectedTags] };
   if(subEditId !== null) {
     sub.id = subscriptions[subEditId].id;
