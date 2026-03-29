@@ -1100,13 +1100,8 @@ function deleteSub(i) {
 
 // ── Init ──
 async function init() {
-  // ローディング表示
-  const loadingEl = document.createElement('div');
-  loadingEl.id = 'loading';
-  loadingEl.style.cssText = 'position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:12px';
-  loadingEl.innerHTML = '<div style="font-family:'DM Serif Display',serif;font-size:24px;color:var(--accent)">家計簿</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.1em">Loading...</div>';
-  document.body.appendChild(loadingEl);
-
+  // まずUIを表示してからGASを読み込む
+  showScreen('calendar');
   try {
     const data = await Promise.race([
       gasGet({ action: 'getAll' }),
@@ -1119,13 +1114,11 @@ async function init() {
       if(t.length) tags = t;
       shops         = data.shops     || data['ショップ']  || [];
       subscriptions = data.subs      || data['購読']      || [];
+      renderCalendar();
     }
   } catch(e) {
     console.error('GAS読み込みエラー:', e);
-    // エラーでもアプリは起動する
   }
-  loadingEl.remove();
-  showScreen('calendar');
 }
 init();
 </script>
