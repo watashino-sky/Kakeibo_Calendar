@@ -773,7 +773,7 @@ async function loadData() {
     if(data.shops) shops = data.shops;
     if(data.subs) subs = data.subs;
     renderCalendar();
-  } catch(e) { console.warn('GAS load failed:', e); }
+  } catch(e) { toast('読み込みエラー: ' + e.message, 'err'); }
 }
 loadData();
 </script>
