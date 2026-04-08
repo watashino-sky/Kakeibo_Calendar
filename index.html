@@ -357,8 +357,16 @@ function fmtJP(s) {
   const d = new Date(s+'T00:00:00');
   return (d.getMonth()+1)+'月'+d.getDate()+'日';
 }
+function normalizeDate(s) {
+  if(!s) return s;
+  if(!s.includes('T')) return s;
+  // UTCのISOをJST(+9h)に変換してYYYY-MM-DD取得
+  const d = new Date(s);
+  return fmt(new Date(d.getTime() + 9*60*60*1000));
+}
 function daysUntil(s) {
-  return Math.ceil((new Date(s+'T00:00:00') - new Date(todayStr+'T00:00:00')) / 86400000);
+  const clean = normalizeDate(s);
+  return Math.ceil((new Date(clean+'T00:00:00') - new Date(todayStr+'T00:00:00')) / 86400000);
 }
 let _toastTimer;
 function toast(msg, type='ok') {
@@ -603,7 +611,8 @@ function renderCoupons() {
       const expCls = unl ? '' : (days<=3&&!c.used?'urgent':days<=7&&!c.used?'soon':'');
       const expLabel = c.used?'使用済み':unl?'無制限':days<0?'期限切れ':days===0?'今日まで':'残'+days+'日';
       html += '<div class="coupon-card'+(c.used?' used':'')+'"><div class="coupon-top"><div class="coupon-shop">'+c.shop+'</div>'+(unl?'<div class="badge unlimited">∞ 無制限</div>':c.used?'<div class="badge used-badge">Used</div>':'')+'</div>';
-      html += '<div class="coupon-exp '+expCls+'">'+(unl?'—':c.exp.replace(/-/g,'/'))+'　<span style="font-size:10px;opacity:.8">('+expLabel+')</span></div>';
+      const expDisplay = unl ? '—' : normalizeDate(c.exp).replace(/-/g,'/');
+      html += '<div class="coupon-exp '+expCls+'">'+expDisplay+'　<span style="font-size:10px;opacity:.8">('+expLabel+')</span></div>';
       if(c.memo) html += '<div class="coupon-memo">'+c.memo+'</div>';
       if(!c.used) html += '<div class="coupon-actions"><div class="coupon-btn use" onclick="useCoupon('+c.id+')">使用済みにする</div><div class="coupon-btn" onclick="delCoupon('+c.id+')">削除</div></div>';
       html += '</div>';
@@ -726,7 +735,7 @@ function renderSettings() {
     '<div class="manage-item"><div class="manage-name">'+s+'</div><div class="manage-actions"><div class="manage-btn" onclick="renameShop('+i+')">編集</div><div class="manage-btn del" onclick="removeShop('+i+')">削除</div></div></div>'
   ).join('') || '<div style="color:var(--dim);font-size:12px">まだありません</div>';
   document.getElementById('sub-list').innerHTML = subs.map((s,i) =>
-    '<div class="manage-item"><div style="flex:1"><div class="manage-name">'+s.name+'</div><div class="manage-sub">'+s.amount.toLocaleString()+'円 / '+(s.cycle==='monthly'?'月次':'年次')+' — 次回 '+s.nextDate.replace(/-/g,'/')+'</div></div><div class="manage-actions"><div class="manage-btn" onclick="openSubForm('+i+')">編集</div></div></div>'
+    '<div class="manage-item"><div style="flex:1"><div class="manage-name">'+s.name+'</div><div class="manage-sub">'+s.amount.toLocaleString()+'円 / '+(s.cycle==='monthly'?'月次':'年次')+' — 次回 '+normalizeDate(s.nextDate).replace(/-/g,'/')+'</div></div><div class="manage-actions"><div class="manage-btn" onclick="openSubForm('+i+')">編集</div></div></div>'
   ).join('') || '<div style="color:var(--dim);font-size:12px">まだありません</div>';
 }
 function addTag() {
@@ -762,18 +771,32 @@ function renameShop(i) {
 // ── init ──
 goScreen('calendar');
 async function loadData() {
+  // ローディング表示
+  document.getElementById('cal-summary').innerHTML =
+    '<div class="summary-label">読み込み中...</div><div class="summary-amount" style="font-size:16px;opacity:.5">しばらくお待ちください</div>';
   try {
     const data = await Promise.race([
       gasGet({action:'getAll'}),
       new Promise((_,rej) => setTimeout(()=>rej(new Error('timeout')),12000))
     ]);
     if(data.records) records = data.records;
-    if(data.coupons) coupons = data.coupons;
+    if(data.coupons) {
+      // exp の日付を正規化
+      coupons = data.coupons.map(c => ({...c, exp: normalizeDate(c.exp)}));
+    }
     if(data.tags&&data.tags.length) tags = data.tags;
     if(data.shops) shops = data.shops;
-    if(data.subs) subs = data.subs;
+    if(data.subs) {
+      // nextDate を正規化
+      subs = data.subs.map(s => ({...s, nextDate: normalizeDate(s.nextDate)}));
+    }
     renderCalendar();
-  } catch(e) { toast('読み込みエラー: ' + e.message, 'err'); }
+    renderCoupons();
+    renderSettings();
+  } catch(e) {
+    toast('読み込みエラー: ' + e.message, 'err');
+    renderCalendar(); // エラーでもカレンダーは表示
+  }
 }
 loadData();
 </script>
