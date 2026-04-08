@@ -779,7 +779,7 @@ async function loadData() {
       gasGet({action:'getAll'}),
       new Promise((_,rej) => setTimeout(()=>rej(new Error('timeout')),12000))
     ]);
-    if(data.records) records = data.records;
+    if(data.records) records = data.records.map(r => ({...r, date: normalizeDate(r.date)}));
     if(data.coupons) {
       // exp の日付を正規化
       coupons = data.coupons.map(c => ({...c, exp: normalizeDate(c.exp)}));
