@@ -373,11 +373,6 @@ function toast(msg, type='ok') {
   clearTimeout(_toastTimer);
   _toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
 }
-function showDebug(msg) {
-  let el = document.getElementById('_dbg');
-  if(!el) { el = document.createElement('div'); el.id='_dbg'; el.style.cssText='position:fixed;top:0;left:0;right:0;background:#000;color:#0f0;font-family:monospace;font-size:11px;padding:10px 12px;z-index:9999;white-space:pre-wrap;word-break:break-all'; el.onclick=()=>el.remove(); document.body.appendChild(el); }
-  el.textContent = '[TAP TO CLOSE]\n'+msg;
-}
 
 // ── state ──
 const today = new Date();
@@ -442,8 +437,8 @@ function renderCalendar() {
   document.getElementById('cal-year').textContent = y;
   const ms = y+'-'+String(m+1).padStart(2,'0');
   const dayTotals = {};
-  records.filter(r => r.date.startsWith(ms)).forEach(r => {
-    const d = r.date.split('-')[2].padStart(2,'0');
+  records.filter(r => r.date && String(r.date).slice(0,10).startsWith(ms)).forEach(r => {
+    const d = String(r.date).slice(0,10).split('-')[2].padStart(2,'0');
     let items = [];
     try { items = Array.isArray(r.items) ? r.items : (typeof r.items === 'string' ? JSON.parse(r.items) : []); } catch(e) {}
     dayTotals[d] = (dayTotals[d]||0) + items.reduce((s,i) => s+(Number(i.price)||0), 0);
@@ -492,13 +487,16 @@ function openDay(dateStr) {
   goScreen('day');
 }
 function renderDay() {
-  const recs = records.filter(r => r.date === curDate);
+  const recs = records.filter(r => r.date && String(r.date).slice(0,10) === curDate);
   const daySubs = subs.filter(sub => {
     const [y,m] = curDate.split('-').map(Number);
     return getSubDates(sub, y, m-1).includes(curDate);
   });
-  const total = recs.reduce((s,r) => s+r.items.reduce((ss,i)=>ss+i.price,0), 0)
-    + daySubs.reduce((s,sub)=>s+sub.amount,0);
+  const total = recs.reduce((s,r) => {
+    let items = [];
+    try { items = Array.isArray(r.items) ? r.items : (typeof r.items === 'string' ? JSON.parse(r.items) : []); } catch(e) {}
+    return s + items.reduce((ss,i)=>ss+(Number(i.price)||0),0);
+  }, 0) + daySubs.reduce((s,sub)=>s+Number(sub.amount),0);
   let html = '<div class="day-header"><div class="day-date">'+fmtJP(curDate)+'</div><div class="day-total">'+total.toLocaleString()+' 円</div></div>';
   if(daySubs.length > 0) {
     html += '<div class="sec-label">サブスク請求</div>';
@@ -509,11 +507,13 @@ function renderDay() {
   if(recs.length > 0) {
     html += '<div class="sec-label">買い物</div>';
     recs.forEach(r => {
-      const rt = r.items.reduce((s,i)=>s+i.price,0);
+      let ritems = [];
+      try { ritems = Array.isArray(r.items) ? r.items : (typeof r.items === 'string' ? JSON.parse(r.items) : []); } catch(e) {}
+      const rt = ritems.reduce((s,i)=>s+(Number(i.price)||0),0);
       const hc = coupons.some(c => c.shop===r.shop);
       html += '<div class="trip-card"><div class="trip-head"><div class="trip-shop">'+r.shop+'</div><div class="trip-total">'+rt.toLocaleString()+'円</div></div>';
       if(hc) html += '<div class="coupon-alert">🎫 '+r.shop+'のクーポンがあります</div>';
-      html += '<div class="trip-items">'+r.items.map(item => '<div class="trip-item"><div class="trip-price">'+item.price.toLocaleString()+'円</div>'+item.tags.map(t=>'<span class="tag-chip">'+t+'</span>').join('')+'</div>').join('')+'</div></div>';
+      html += '<div class="trip-items">'+ritems.map(item => '<div class="trip-item"><div class="trip-price">'+Number(item.price).toLocaleString()+'円</div>'+(item.tags||[]).map(t=>'<span class="tag-chip">'+t+'</span>').join('')+'</div>').join('')+'</div></div>';
     });
   }
   if(recs.length===0 && daySubs.length===0) html += '<div class="empty-state">🛒<br>まだ記録がありません</div>';
@@ -789,10 +789,7 @@ async function loadData() {
     if(data.shops) shops = data.shops;
     if(data.subs) subs = data.subs;
     renderCalendar();
-    const r0 = records[0];
-    const dbgItems = r0 ? (typeof r0.items) + ':' + JSON.stringify(r0.items).slice(0,40) : 'no-rec';
-    showDebug('OK R:'+records.length+' S:'+subs.length+' | '+dbgItems);
-  } catch(e) { showDebug('ERR '+String(e).slice(0,80)); }
+  } catch(e) { console.warn('GAS load failed:', e); }
 }
 loadData();
 </script>
