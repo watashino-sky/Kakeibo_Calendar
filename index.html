@@ -438,8 +438,9 @@ function renderCalendar() {
   const ms = y+'-'+String(m+1).padStart(2,'0');
   const dayTotals = {};
   records.filter(r => r.date.startsWith(ms)).forEach(r => {
-    const d = r.date.split('-')[2];
-    const items = Array.isArray(r.items) ? r.items : (typeof r.items === 'string' ? JSON.parse(r.items) : []);
+    const d = r.date.split('-')[2].padStart(2,'0');
+    let items = [];
+    try { items = Array.isArray(r.items) ? r.items : (typeof r.items === 'string' ? JSON.parse(r.items) : []); } catch(e) {}
     dayTotals[d] = (dayTotals[d]||0) + items.reduce((s,i) => s+(Number(i.price)||0), 0);
   });
   const couponDays = {};
@@ -783,6 +784,8 @@ async function loadData() {
     if(data.shops) shops = data.shops;
     if(data.subs) subs = data.subs;
     renderCalendar();
+    const r0 = records[0];
+    toast('R:'+records.length+' S:'+subs.length+(r0?' date:'+r0.date:''));
   } catch(e) { console.warn('GAS load failed:', e); }
 }
 loadData();
