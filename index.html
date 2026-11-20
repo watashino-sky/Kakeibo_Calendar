@@ -25,6 +25,9 @@ body{display:flex;flex-direction:column;max-width:480px;margin:0 auto}
 .bar-t{flex:1;font-size:17px;font-weight:600;color:var(--hi);letter-spacing:.01em}
 .bar-bk{background:none;border:none;color:var(--dim);font-size:24px;cursor:pointer;line-height:1;padding:0 6px 2px;border-radius:6px;font-family:inherit}
 .bar-bk:active{background:var(--bg3)}
+.bar-tot{font-family:"DM Mono",monospace;font-size:15px;color:var(--acc);font-weight:500}
+.btn-sv{background:var(--acc);color:#fff;border:none;border-radius:7px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+.btn-sv:active{background:var(--acc2)}
 
 /* nav */
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:62px;background:var(--bg2);border-top:1px solid var(--bdr);display:flex;z-index:50}
@@ -126,6 +129,15 @@ input[type=date]::-webkit-calendar-picker-indicator{opacity:.45;cursor:pointer}
 .add-row svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
 .add-row:active{opacity:.7}
 
+/* inline add (shop form) */
+.iadd{padding:12px;border-top:1.5px solid var(--bdr);background:var(--bg3)}
+.iadd-row{display:flex;gap:8px;margin-bottom:8px}
+.iadd-pr{flex:1;background:var(--card);border:1.5px solid var(--bdr);border-radius:8px;color:var(--hi);font-size:15px;padding:10px 12px;outline:none;font-family:inherit;-webkit-appearance:none;appearance:none}
+.iadd-pr:focus{border-color:var(--acc)}
+.iadd-btn{background:var(--acc);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.iadd-btn:active{background:var(--acc2)}
+.iadd-chips{display:flex;flex-wrap:wrap;gap:6px}
+
 /* buttons */
 .brow{display:flex;gap:8px;padding:12px}
 .btn{flex:1;padding:13px;border-radius:10px;border:none;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.02em}
@@ -201,11 +213,13 @@ input[type=date]::-webkit-calendar-picker-indicator{opacity:.45;cursor:pointer}
   <div id="day-body"></div>
 </div>
 
-<!-- SHOP FORM -->
+<!-- SHOP FORM (all-in-one) -->
 <div id="s-shop" class="sc">
   <div class="bar">
     <button class="bar-bk" onclick="go('day')">&#8249;</button>
     <span class="bar-t">買い物を追加</span>
+    <span class="bar-tot" id="shop-running">¥0</span>
+    <button class="btn-sv" onclick="saveShop()">保存</button>
   </div>
   <div class="fw">
     <div class="fld">
@@ -214,35 +228,16 @@ input[type=date]::-webkit-calendar-picker-indicator{opacity:.45;cursor:pointer}
       <datalist id="shop-dl"></datalist>
     </div>
   </div>
-  <div class="sl">商品</div>
   <div id="item-rows"></div>
-  <div class="add-row" onclick="goItem()">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-    商品を追加
+  <div class="iadd">
+    <div class="iadd-row">
+      <input id="item-pr" class="iadd-pr" type="number" inputmode="numeric" placeholder="金額（円）" oninput="upRunning()">
+      <button class="iadd-btn" onclick="addItem()">追加</button>
+    </div>
+    <div id="item-tgs" class="iadd-chips"></div>
   </div>
   <div class="brow">
     <button class="btn btn-g" onclick="go('day')">キャンセル</button>
-    <button class="btn btn-p" onclick="saveShop()">保存</button>
-  </div>
-</div>
-
-<!-- ITEM FORM -->
-<div id="s-item" class="sc">
-  <div class="bar">
-    <button class="bar-bk" onclick="go('shop')">&#8249;</button>
-    <span class="bar-t">商品を追加</span>
-  </div>
-  <div class="fw">
-    <div class="fld">
-      <label>金額（円）</label>
-      <input id="item-pr" type="number" inputmode="numeric" placeholder="0">
-    </div>
-  </div>
-  <div class="sl">カテゴリ</div>
-  <div id="item-tgs" class="tgsel"></div>
-  <div class="brow">
-    <button class="btn btn-g" onclick="go('shop')">キャンセル</button>
-    <button class="btn btn-p" onclick="addItem()">追加</button>
   </div>
 </div>
 
@@ -559,7 +554,10 @@ function startShop(){
   document.getElementById('shop-nm').value='';
   upDl();
   renderItRows();
+  renderIadd();
+  upRunning();
   go('shop');
+  setTimeout(function(){document.getElementById('item-pr').focus();},120);
 }
 function upDl(){
   document.getElementById('shop-dl').innerHTML=shops.map(function(s){return'<option value="'+s+'">';}).join('');
@@ -568,29 +566,32 @@ function renderItRows(){
   var el=document.getElementById('item-rows');
   if(!curItems.length){el.innerHTML='';return;}
   el.innerHTML=curItems.map(function(it,i){
-    return'<div class="it-row"><div><div class="it-p">'+it.price.toLocaleString()+'円</div><div class="it-t">'+it.tags.join('・')+'</div></div><button class="it-del" onclick="delItem('+i+')">&#215;</button></div>';
+    return'<div class="it-row"><div><div class="it-p">'+it.price.toLocaleString()+'円</div><div class="it-t">'+(it.tags.join('・')||'カテゴリなし')+'</div></div><button class="it-del" onclick="delItem('+i+')">&#215;</button></div>';
   }).join('');
 }
-function delItem(i){curItems.splice(i,1);renderItRows();}
-
-function goItem(){
-  selIt=[];
-  document.getElementById('item-pr').value='';
+function delItem(i){curItems.splice(i,1);renderItRows();upRunning();}
+function renderIadd(){
   document.getElementById('item-tgs').innerHTML=tags.map(function(t){
-    return'<div class="tg" onclick="togIt(this,\''+t+'\')">'+t+'</div>';
+    return'<div class="tg" data-t="'+t+'" onclick="togTg(this)">'+t+'</div>';
   }).join('');
-  go('item');
 }
-function togIt(el,t){
-  el.classList.toggle('on');
-  if(el.classList.contains('on'))selIt.push(t);else selIt=selIt.filter(function(x){return x!==t;});
+function togTg(el){el.classList.toggle('on');}
+function upRunning(){
+  var cur=Number(document.getElementById('item-pr').value)||0;
+  var tot=curItems.reduce(function(s,it){return s+it.price;},0)+cur;
+  document.getElementById('shop-running').textContent='¥'+tot.toLocaleString();
 }
 function addItem(){
   var p=Number(document.getElementById('item-pr').value);
   if(!p||p<=0){toast('金額を入力してください','err');return;}
-  curItems.push({price:p,tags:selIt.slice(),_id:nid++});
+  var selTags=[];
+  document.querySelectorAll('#item-tgs .tg.on').forEach(function(el){selTags.push(el.dataset.t);});
+  curItems.push({price:p,tags:selTags,_id:nid++});
+  document.getElementById('item-pr').value='';
+  document.querySelectorAll('#item-tgs .tg').forEach(function(el){el.classList.remove('on');});
   renderItRows();
-  go('shop');
+  upRunning();
+  setTimeout(function(){document.getElementById('item-pr').focus();},30);
 }
 function saveShop(){
   var shop=document.getElementById('shop-nm').value.trim();
