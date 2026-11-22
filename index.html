@@ -398,7 +398,10 @@ function rtot(r){return gitems(r).reduce(function(s,i){return s+(Number(i.price)
 function gasGet(p){p._=Date.now();return fetch(GAS+'?'+new URLSearchParams(p),{redirect:'follow'}).then(function(r){return r.json();});}
 function gasPost(b){
   return fetch(GAS,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain'},body:JSON.stringify(b)})
-    .then(function(r){return r.json();})
+    .then(function(r){
+      if(!r.ok)return{error:'HTTP '+r.status};
+      return r.text().then(function(t){try{return JSON.parse(t);}catch(e){return{error:'parse error: '+t.slice(0,80)};}});
+    })
     .catch(function(e){return{error:e.message};});
 }
 
@@ -604,8 +607,12 @@ function saveShop(){
       curItems=[];
       toast('保存しました');
       go('day');
-    }else toast('保存に失敗しました','err');
-  });
+    }else{
+      var msg=r&&r.error?'GASエラー: '+r.error:'保存に失敗しました';
+      toast(msg,'err');
+      console.error('saveShop error',r);
+    }
+  }).catch(function(e){toast('通信エラー: '+e.message,'err');console.error(e);});
 }
 
 // ── subs ──
@@ -748,15 +755,33 @@ function saveSettings(){
 go('cal');
 function load(){
   var timeout=new Promise(function(_,r){setTimeout(function(){r(new Error('timeout'));},12000);});
-  Promise.race([gasGet({action:'getAll'}),timeout]).then(function(data){
-    if(data.records)records=data.records;
+  // まずPOSTを試み、recordsが空ならGETにフォールバック
+  Promise.race([gasPost({action:'getAll'}),timeout]).then(function(data){
+    var loaded=false;
+    if(data.records&&data.records.length){records=data.records;loaded=true;}
     if(data.coupons)coupons=data.coupons;
     if(data.tags&&data.tags.length)tags=data.tags;
     if(data.shops)shops=data.shops;
     if(data.subs)subs=data.subs;
-    renderCal();
-    upDl();
-  }).catch(function(e){console.warn('load error',e);});
+    if(loaded){
+      toast('読込: '+records.length+'件');
+      renderCal();upDl();
+    }else{
+      // POSTでrecordsが取れなかった場合はGETにフォールバック
+      return gasGet({action:'getAll'}).then(function(d){
+        if(d.records)records=d.records;
+        if(d.coupons)coupons=d.coupons;
+        if(d.tags&&d.tags.length)tags=d.tags;
+        if(d.shops)shops=d.shops;
+        if(d.subs)subs=d.subs;
+        toast('読込(GET): '+records.length+'件');
+        renderCal();upDl();
+      });
+    }
+  }).catch(function(e){
+    toast('通信エラー','err');
+    console.warn('load error',e);
+  });
 }
 load();
 </script>
