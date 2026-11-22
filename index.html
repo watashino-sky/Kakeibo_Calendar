@@ -361,7 +361,13 @@ function pad(n){return String(n).padStart(2,'0');}
 function sd(v){
   if(!v)return'';
   if(v instanceof Date)return fmt(v);
-  return String(v).replace(/\//g,'-').slice(0,10);
+  var s=String(v);
+  // ISO datetime (UTC) → ローカル時刻で日付を取得（1日ずれ防止）
+  if(s.length>10&&s.indexOf('T')>=0){
+    var d=new Date(s);
+    if(!isNaN(d.getTime()))return fmt(d);
+  }
+  return s.replace(/\//g,'-').slice(0,10);
 }
 
 // advNextDate: 保存済みの nextDate を今日以降に繰り越す
