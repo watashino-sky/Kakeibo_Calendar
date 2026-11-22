@@ -395,7 +395,7 @@ function gitems(r){
 function rtot(r){return gitems(r).reduce(function(s,i){return s+(Number(i.price)||0);},0);}
 
 // ── API ──
-function gasGet(p){return fetch(GAS+'?'+new URLSearchParams(p),{redirect:'follow'}).then(function(r){return r.json();});}
+function gasGet(p){p._=Date.now();return fetch(GAS+'?'+new URLSearchParams(p),{redirect:'follow'}).then(function(r){return r.json();});}
 function gasPost(b){
   return fetch(GAS,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain'},body:JSON.stringify(b)})
     .then(function(r){return r.json();})
